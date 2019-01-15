@@ -1,0 +1,60 @@
+package com.example.mahen.adibha2.DBhelper;
+
+public class recycleAdapter{
+    public String timeat;
+    public String travel_type;
+    public String book_id;
+    public String origin, destination;
+    public String v_type;
+
+
+
+    public String getV_type() {
+        return v_type;
+    }
+
+    public String getTimeat() {
+        return timeat;
+    }
+
+    public String getTravel_type() {
+        return travel_type;
+    }
+
+    public String getBook_id() {
+        return book_id;
+    }
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setTimeat(String timeat) {
+        this.timeat = timeat;
+    }
+
+    public void setTravel_type(String travel_type) {
+        this.travel_type = travel_type;
+    }
+
+    public void setBook_id(String book_id) {
+        this.book_id = book_id;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public void setV_type(String v_type) {
+        this.v_type = v_type;
+    }
+
+}

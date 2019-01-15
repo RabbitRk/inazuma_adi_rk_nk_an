@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    tools:context=".Ottp_page">
+
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        app:srcCompat="@drawable/newlogo"
+        tools:ignore="ContentDescription" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="349dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/otpTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/textview_border"
+            android:drawableStart="@drawable/user_phone_icon"
+            android:drawablePadding="10dp"
+            android:fontFamily="serif"
+            android:hint="@string/enter_otp_number"
+            android:inputType="phone"
+            android:textColor="#ffff"
+            android:textColorHint="#ffff"
+            android:textSize="12sp"
+            tools:ignore="Autofill"/>
+
+        <com.dx.dxloadingbutton.lib.LoadingButton
+            android:id="@+id/loading_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="30dp"
+            android:layout_gravity="center"
+            app:lb_btnText="Submit"
+            app:lb_btnColor="@color/textline"
+            app:lb_resetAfterFailed="true"/>
+
+    </LinearLayout>
+</LinearLayout>
