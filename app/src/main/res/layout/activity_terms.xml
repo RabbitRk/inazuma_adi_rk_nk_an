@@ -17,6 +17,7 @@
         android:layout_height="50dp"
         android:id="@+id/TitleWindow"
         android:textSize="24sp"
+        android:textColor="@color/colorPrimaryDark"
         android:typeface="serif"
         android:textStyle="bold" />
 
@@ -38,7 +39,7 @@
                 android:layout_height="match_parent"
                 android:id="@+id/Subtitle"
                 android:typeface="serif"
-
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="16sp"
                 android:letterSpacing="0.15"
                 android:textStyle="bold"
@@ -49,9 +50,8 @@
                 android:id="@+id/MessageWindow"
                 android:lineSpacingExtra="10dp"
                 android:typeface="serif"
-
                 android:letterSpacing="0.25"
-
+                android:textColor="@color/text_color"
                 android:textSize="14sp"/>
 
 
