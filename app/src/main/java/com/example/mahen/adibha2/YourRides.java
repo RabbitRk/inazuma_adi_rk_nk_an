@@ -17,6 +17,7 @@ import java.util.List;
 
 class YourRides extends AppCompatActivity {
 
+    String val;
     dbHelper database;
     RecyclerView recyclerView;
     recycleAdapter recycler;
