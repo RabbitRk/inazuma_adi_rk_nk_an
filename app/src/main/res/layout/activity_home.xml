@@ -209,15 +209,15 @@
             </LinearLayout>
 
         </RelativeLayout>
-        <!--<android.support.design.widget.NavigationView-->
-            <!--android:id="@+id/nav_view"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_gravity="start"-->
-            <!--android:background="@color/bgcolor"-->
-            <!--app:itemIconTint="@color/colorAccent"-->
-            <!--app:itemTextAppearance="@style/NavigationDrawerStyle"-->
-            <!--app:itemTextColor="#fff"-->
-            <!--app:menu="@menu/drawer_menu" />-->
+        <android.support.design.widget.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@color/bgcolor"
+            app:itemIconTint="@color/colorAccent"
+            app:itemTextAppearance="@style/NavigationDrawerStyle"
+            app:itemTextColor="#fff"
+            app:menu="@menu/drawer_menu" />
     </android.support.v4.widget.DrawerLayout>
 </RelativeLayout>
