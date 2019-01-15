@@ -29,16 +29,6 @@
                 android:gravity="center"
                 android:fontFamily="serif"
                 android:textSize="13sp"
-                android:textColorHint="@color/text_color"
-                android:textColor="@color/text_color"
-                android:hint="Time" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:fontFamily="serif"
-                android:textSize="13sp"
                 android:textColor="@color/text_color"
                 android:text="Rent a cab at flexible hourly packages"
                 android:textStyle="bold" />
@@ -78,7 +68,7 @@
     <LinearLayout
         android:id="@+id/btn_nav_bar2"
         android:layout_width="match_parent"
-        android:layout_height="38dp"
+        android:layout_height="48dp"
         android:layout_below="@+id/mycard"
         android:orientation="horizontal">
         <Button
