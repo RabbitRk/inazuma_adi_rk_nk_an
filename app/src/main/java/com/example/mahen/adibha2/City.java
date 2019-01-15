@@ -43,7 +43,7 @@ import static com.example.mahen.adibha2.Preferences.PrefsManager.USER_PREFS;
 
 public class City extends AppCompatActivity {
 //    RecyclerView packView;
-String git, gt2;
+String git, gt3;
     private int mYear, mMonth, mDay, mHour, mMinute;
     Boolean check_time = false, check_date = false;
 
