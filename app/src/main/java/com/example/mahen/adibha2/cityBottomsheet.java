@@ -22,6 +22,7 @@ public class cityBottomsheet extends BottomSheetDialogFragment {
     static String ori_lng = null;
     static String dest_lat = null;
     static String dest_lng = null;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
