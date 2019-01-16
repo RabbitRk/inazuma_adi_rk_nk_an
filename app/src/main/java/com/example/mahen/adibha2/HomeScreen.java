@@ -138,6 +138,10 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
         dropLocTxt = findViewById(R.id.dropLocation);
         pickupLocTxt = findViewById(R.id.pickupLocation);
 
+
+        //hiding the drop textbox on default
+        dropLocTxt.setVisibility(View.GONE);
+
         mContext = HomeScreen.this;
 
         //declarations
@@ -365,11 +369,11 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
                 Toast.makeText(getApplicationContext(), "Book Option Selected", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_about:
-                Intent intent1=new Intent(this,about.class);
+                Intent intent1 = new Intent(this, about.class);
                 startActivity(intent1);
                 break;
             case R.id.nav_your_rides:
-                Intent intent=new Intent(this,YourRides.class);
+                Intent intent = new Intent(this, YourRides.class);
                 startActivity(intent);
                 Toast.makeText(getApplicationContext(), "Your Rides Option Selected", Toast.LENGTH_SHORT).show();
                 break;
@@ -531,17 +535,17 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
             switch (view.getId()) {
                 case R.id.ride_now:
                     disableAuto(false);
-                    type="rental";
+                    type = "rental";
                     getnavigation();
                     break;
                 case R.id.button4:
                     disableAuto(true);
-                    type="city";
+                    type = "city";
                     getnavigation();
                     break;
                 case R.id.button5:
                     disableAuto(true);
-                    type="outstation";
+                    type = "outstation";
                     getnavigation();
                     break;
 
@@ -552,17 +556,17 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
             switch (view.getId()) {
                 case R.id.ride_now:
                     disableAuto(false);
-                    type="rental";
+                    type = "rental";
                     getnavigation();
                     break;
                 case R.id.button4:
                     disableAuto(true);
-                    type="city";
+                    type = "city";
                     getnavigation();
                     break;
                 case R.id.button5:
                     disableAuto(true);
-                    type="outstation";
+                    type = "outstation";
                     getnavigation();
                     break;
             }
@@ -602,9 +606,9 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
                         BookBottomSheet bottomSheet1 = new BookBottomSheet();
                         Bundle bundle = new Bundle();
                         bundle.putString("pickn", pickupLocTxt.getText().toString());
-                        bundle.putString("dropn",dropLocTxt.getText().toString());
+                        bundle.putString("dropn", dropLocTxt.getText().toString());
                         bundle.putString("vehicle", "Prime");
-                        bundle.putString("travel_type",type);
+                        bundle.putString("travel_type", type);
                         bottomSheet1.setArguments(bundle);
                         bottomSheet1.show(getSupportFragmentManager(), "exampleBottomSheet");
                         break;
@@ -613,9 +617,9 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
                         BookBottomSheet bottomSheet2 = new BookBottomSheet();
                         Bundle bundle1 = new Bundle();
                         bundle1.putString("pickn", pickupLocTxt.getText().toString());
-                        bundle1.putString("dropn",dropLocTxt.getText().toString());
+                        bundle1.putString("dropn", dropLocTxt.getText().toString());
                         bundle1.putString("vehicle", "SUV");
-                        bundle1.putString("travel_type",type);
+                        bundle1.putString("travel_type", type);
                         bottomSheet2.setArguments(bundle1);
                         bottomSheet2.show(getSupportFragmentManager(), "exampleBottomSheet");
                         break;
@@ -624,7 +628,6 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
             }
         });
     }
-
 
 
     private void slideDown(View view) {

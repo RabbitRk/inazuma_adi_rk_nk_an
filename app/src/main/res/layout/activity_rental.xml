@@ -211,10 +211,10 @@
                         <!--</android.support.v7.widget.RecyclerView>-->
                         <ListView
                             android:id="@+id/packdetails"
+                            style="@drawable/listview_item"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:choiceMode="singleChoice"
-                            style="@style/custom"
                             tools:ignore="NestedScrolling">
 
                         </ListView>
@@ -245,6 +245,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
                         android:orientation="vertical">
 
                         <LinearLayout

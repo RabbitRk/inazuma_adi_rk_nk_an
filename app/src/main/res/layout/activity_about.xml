@@ -10,12 +10,14 @@
     android:paddingRight="16dp"
     android:paddingBottom="16dp"
     android:paddingTop="16dp"
+    android:background="@drawable/background"
     tools:context=".MainActivity">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:textSize="24sp"
+        android:textColor="@color/colorPrimaryDark"
         android:typeface="serif"
         android:textStyle="bold"
         android:id="@+id/TitleWindow"
@@ -31,7 +33,8 @@
             android:id="@+id/MessageWindow"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="20sp"
+            android:textSize="13sp"
+            android:textColor="@color/text_color"
             android:typeface="serif"
             />
 

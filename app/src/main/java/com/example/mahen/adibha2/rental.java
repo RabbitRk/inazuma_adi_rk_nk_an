@@ -367,19 +367,19 @@ public class rental extends AppCompatActivity {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay,
                                           int minute) {
-
+                        timeatTxt.setText(String.format("%d:%d", hourOfDay, minute));
                     }
 
                 }, mHour, mMinute, false);
         timePickerDialog2.show();
+
         final DatePickerDialog datePickerDialog2 = new DatePickerDialog(rental.this,
                 new DatePickerDialog.OnDateSetListener() {
 
+                    @SuppressLint("DefaultLocale")
                     @Override
-                    public void onDateSet(DatePicker view, int year,
-                                          int monthOfYear, int dayOfMonth) {
-//                                                datein.setText(String.format("%d-%d-%d", dayOfMonth, monthOfYear + 1, year));
-//                                Toast.makeText(RentalView.this,dayOfMonth + "-" + (monthOfYear + 1) + "-" + year,Toast.LENGTH_SHORT).show();
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        dateonTxt.setText(String.format("%d-%d-%d", dayOfMonth, monthOfYear + 1, year));
                     }
 
                 }, mYear, mMonth, mDay);
@@ -396,6 +396,8 @@ public class rental extends AppCompatActivity {
     }
 
     public void confirmBooking(View view) {
+
+        dateon = dateonTxt.getText().toString()+" "+timeatTxt.getText().toString();
 
         datetime = dateon+" "+timeat;
 

@@ -60,7 +60,7 @@
         <!--<item name="paddingEnd">@dimen/bottom_navigation_padding</item>-->
     </style>
 
-    <style name="custom">
+    <style name="custom" parent="NavigationDrawerStyle2">
         <item name="android:textColor">#fff</item>
         <item name="android:typeface">serif</item>
     </style>

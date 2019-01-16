@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <android.support.v7.widget.CardView
         android:id="@+id/mycard"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/bgcolor"
         android:paddingTop="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
             android:orientation="vertical">
 
             <ImageView
@@ -24,12 +27,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:hint="Time" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
+                android:fontFamily="serif"
+                android:textSize="13sp"
+                android:textColor="@color/text_color"
                 android:text="Rent a cab at flexible hourly packages"
                 android:textStyle="bold" />
 
@@ -37,32 +37,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:paddingTop="10dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Hourly Package"
-
+                    android:hint="Packages Starting At"
+                    android:fontFamily="serif"
+                    android:textSize="13sp"
+                    android:textColorHint="@color/colorAccent"
                     android:paddingStart="30dp"
                     android:paddingEnd="25dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Multiple Stops"
-
+                    android:hint="250"
+                    android:fontFamily="serif"
+                    android:drawableStart="@drawable/ic_rupee_indian"
+                    android:textSize="13sp"
+                    android:textColorHint="@color/text_color"
                     android:paddingStart="30dp"
+                    android:paddingTop="5dp"
                     android:paddingEnd="25dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="Always Available"
-
-                    android:paddingStart="15dp"
-                    android:paddingEnd="15dp" />
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
@@ -70,14 +68,13 @@
     <LinearLayout
         android:id="@+id/btn_nav_bar2"
         android:layout_width="match_parent"
-        android:layout_height="38dp"
+        android:layout_height="48dp"
         android:layout_below="@+id/mycard"
         android:orientation="horizontal">
-
         <Button
             android:id="@+id/ride_now2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/bgcolor"
             android:fontFamily="serif"
@@ -96,7 +93,7 @@
         <Button
             android:id="@+id/button3"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/bgcolor"
             android:fontFamily="serif"
