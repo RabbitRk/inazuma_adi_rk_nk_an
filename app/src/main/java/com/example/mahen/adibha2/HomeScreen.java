@@ -187,7 +187,6 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
 //important
         // View present inside drawer layout
 
-
         final NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -536,17 +535,17 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
                 case R.id.ride_now:
                     disableAuto(false);
                     type = "rental";
-                    getnavigation();
+                    getnavigation(type);
                     break;
                 case R.id.button4:
                     disableAuto(true);
                     type = "city";
-                    getnavigation();
+                    getCitynavigation(type);
                     break;
                 case R.id.button5:
                     disableAuto(true);
                     type = "outstation";
-                    getnavigation();
+                    getnavigation(type);
                     break;
 
             }
@@ -557,23 +556,24 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
                 case R.id.ride_now:
                     disableAuto(false);
                     type = "rental";
-                    getnavigation();
+                    getnavigation(type);
                     break;
                 case R.id.button4:
                     disableAuto(true);
                     type = "city";
-                    getnavigation();
+                    getCitynavigation(type);
                     break;
                 case R.id.button5:
                     disableAuto(true);
                     type = "outstation";
-                    getnavigation();
+                    getnavigation(type);
                     break;
             }
 
         }
         isUp = !isUp;
     }
+
 
     public void disableAuto(boolean val) {
         bottomNavigationView.getMenu().getItem(0).setEnabled(val);
@@ -592,21 +592,18 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
         view.startAnimation(animate);
     }
 
-    private void getnavigation() {
+    private void getnavigation(String typeof) {
         Log.i("my_tag", "Welcome");
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 Log.i("my_tag", "Welcome2");
                 switch (menuItem.getTitle().toString()) {
-                    case "Auto":
-                        Toast.makeText(mContext, "I am auto", Toast.LENGTH_SHORT).show();
-                        break;
+
                     case "Prime":
                         BookBottomSheet bottomSheet1 = new BookBottomSheet();
                         Bundle bundle = new Bundle();
                         bundle.putString("pickn", pickupLocTxt.getText().toString());
-                        bundle.putString("dropn", dropLocTxt.getText().toString());
                         bundle.putString("vehicle", "Prime");
                         bundle.putString("travel_type", type);
                         bottomSheet1.setArguments(bundle);
@@ -617,7 +614,69 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
                         BookBottomSheet bottomSheet2 = new BookBottomSheet();
                         Bundle bundle1 = new Bundle();
                         bundle1.putString("pickn", pickupLocTxt.getText().toString());
+                        bundle1.putString("vehicle", "SUV");
+                        bundle1.putString("travel_type", type);
+                        bottomSheet2.setArguments(bundle1);
+                        bottomSheet2.show(getSupportFragmentManager(), "exampleBottomSheet");
+                        break;
+                }
+                return true;
+            }
+        });
+    }
+    private void getCitynavigation(String typeof) {
+        Log.i("my_tag", "Welcome");
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                Log.i("my_tag", "Welcome2");
+                switch (menuItem.getTitle().toString()) {
+                    case "Auto":
+                        cityBottomsheet bottomSheet = new cityBottomsheet();
+                        Bundle bundle0 = new Bundle();
+                        bundle0.putString("pickn", pickupLocTxt.getText().toString());
+                        bundle0.putString("dropn", dropLocTxt.getText().toString());
+
+                        bundle0.putString("ori_lat", String.valueOf(origin.latitude));
+                        bundle0.putString("ori_lng", String.valueOf(origin.longitude));
+                        bundle0.putString("dest_lat", String.valueOf(dest.latitude));
+                        bundle0.putString("dest_lng", String.valueOf(dest.longitude));
+
+                        bundle0.putString("vehicle", "Auto");
+                        bundle0.putString("travel_type", type);
+                        bottomSheet.setArguments(bundle0);
+                        bottomSheet.show(getSupportFragmentManager(), "exampleBottomSheet");
+                        break;
+
+                    case "Prime":
+                        cityBottomsheet bottomSheet1 = new cityBottomsheet();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("pickn", pickupLocTxt.getText().toString());
+                        bundle.putString("dropn", dropLocTxt.getText().toString());
+
+                        bundle.putString("ori_lat", String.valueOf(origin.latitude));
+                        bundle.putString("ori_lng", String.valueOf(origin.longitude));
+                        bundle.putString("dest_lat", String.valueOf(dest.latitude));
+                        bundle.putString("dest_lng", String.valueOf(dest.longitude));
+
+                        bundle.putString("vehicle", "Prime");
+                        bundle.putString("travel_type", type);
+                        bottomSheet1.setArguments(bundle);
+                        bottomSheet1.show(getSupportFragmentManager(), "exampleBottomSheet");
+                        break;
+
+                    case "SUV":
+
+                        cityBottomsheet bottomSheet2 = new cityBottomsheet();
+                        Bundle bundle1 = new Bundle();
+                        bundle1.putString("pickn", pickupLocTxt.getText().toString());
                         bundle1.putString("dropn", dropLocTxt.getText().toString());
+
+                        bundle1.putString("ori_lat", String.valueOf(origin.latitude));
+                        bundle1.putString("ori_lng", String.valueOf(origin.longitude));
+                        bundle1.putString("dest_lat", String.valueOf(dest.latitude));
+                        bundle1.putString("dest_lng", String.valueOf(dest.longitude));
+
                         bundle1.putString("vehicle", "SUV");
                         bundle1.putString("travel_type", type);
                         bottomSheet2.setArguments(bundle1);

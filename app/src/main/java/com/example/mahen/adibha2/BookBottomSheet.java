@@ -19,6 +19,7 @@ import android.widget.DatePicker;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -28,7 +29,7 @@ public class BookBottomSheet extends BottomSheetDialogFragment {
     private int mYear, mMonth, mDay, mHour, mMinute;
     Boolean check_time = false, check_date = false;
 
-    String rideLater_date, rideLater_time, pick_up_loc, v_type = "2",type,drop_loc;
+    String rideLater_date, rideLater_time, pick_up_loc, v_type = "2", type, drop_loc;
 
 
     @Nullable
@@ -41,8 +42,8 @@ public class BookBottomSheet extends BottomSheetDialogFragment {
         assert getArguments() != null;
         pick_up_loc = getArguments().getString("pickn");
         v_type = getArguments().getString("vehicle");
-        type=getArguments().getString("travel_type");
-        drop_loc=getArguments().getString("dropn");
+        type = getArguments().getString("travel_type");
+        drop_loc = getArguments().getString("dropn");
 
         assert v_type != null;
         switch (v_type) {
@@ -61,21 +62,13 @@ public class BookBottomSheet extends BottomSheetDialogFragment {
             @Override
             public void onClick(View v) {
 
-                String month, day, year, dateof;
-
                 Calendar c = Calendar.getInstance();
-                year = String.valueOf(c.get(Calendar.YEAR));
-                month = String.valueOf(c.get(Calendar.MONTH));
-                day = String.valueOf(c.get(Calendar.DAY_OF_MONTH));
+                SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                SimpleDateFormat dft = new SimpleDateFormat("HH:mm");
+                String rideNow_date = df.format(c.getTime());
+                String rideNow_time = dft.format(c.getTime());
 
-                dateof = day+"-"+month+"-"+year;
-                Toast.makeText(getContext(), "date of "+dateof, Toast.LENGTH_SHORT).show();
-
-//                Intent ren = new Intent(getContext(), rental.class);
-//                ren.putExtra("pick",pick_up_loc);
-//                ren.putExtra("date",rideLater_date);
-//                ren.putExtra("time",rideLater_time);
-//                startActivity(ren);
+                rental_confirm(rideNow_date, rideNow_time);
 
             }
         });
@@ -85,9 +78,6 @@ public class BookBottomSheet extends BottomSheetDialogFragment {
             public void onClick(View v) {
 
                 final Calendar c = Calendar.getInstance();
-                mYear = c.get(Calendar.YEAR);
-                mMonth = c.get(Calendar.MONTH);
-                mDay = c.get(Calendar.DAY_OF_MONTH);
                 final DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
                         new DatePickerDialog.OnDateSetListener() {
 
@@ -96,7 +86,8 @@ public class BookBottomSheet extends BottomSheetDialogFragment {
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
 
-                                rideLater_date = String.format("%d-%d-%d", dayOfMonth, monthOfYear + 1, year);
+                                SimpleDateFormat dateof = new SimpleDateFormat("dd-MM-yyyy");
+                                rideLater_date = dateof.format(c.getTime());
                                 getTime();
 
                             }
@@ -121,7 +112,8 @@ public class BookBottomSheet extends BottomSheetDialogFragment {
                     public void onTimeSet(TimePicker view, int hourOfDay,
                                           int minute) {
 
-                        rideLater_time = mHour + ":" + mMinute;
+                        SimpleDateFormat timeof = new SimpleDateFormat("HH:mm");
+                        rideLater_time = timeof.format(c.getTime());
                         rental_confirm(rideLater_date, rideLater_time);
                     }
 
@@ -132,32 +124,14 @@ public class BookBottomSheet extends BottomSheetDialogFragment {
     }
 
     private void rental_confirm(String rideLater_date, String rideLater_time) {
-        if (type.equals("rental")) {
-            Intent ren = new Intent(getContext(), rental.class);
-            ren.putExtra("pick", pick_up_loc);
-            ren.putExtra("date", rideLater_date);
-            ren.putExtra("time", rideLater_time);
-            ren.putExtra("v_type", v_type);
-            startActivity(ren);
-        }
-        if (type.equals("city")) {
-            Intent ren = new Intent(getContext(), City.class);
-            ren.putExtra("pick", pick_up_loc);
-            ren.putExtra("date", rideLater_date);
-            ren.putExtra("time", rideLater_time);
-            ren.putExtra("v_type", v_type);
-            ren.putExtra("drop",drop_loc);
-            startActivity(ren);
-        }
-        if (type.equals("outstation")) {
-            Intent ren = new Intent(getContext(), City.class);
-            ren.putExtra("pick", pick_up_loc);
-            ren.putExtra("date", rideLater_date);
-            ren.putExtra("time", rideLater_time);
-            ren.putExtra("v_type", v_type);
-            ren.putExtra("drop",drop_loc);
-            startActivity(ren);
-        }
+
+        Intent ren = new Intent(getContext(), rental.class);
+        ren.putExtra("pick", pick_up_loc);
+        ren.putExtra("date", rideLater_date);
+        ren.putExtra("time", rideLater_time);
+        ren.putExtra("v_type", v_type);
+        startActivity(ren);
+
     }
 
     public interface BottomSheetListener {

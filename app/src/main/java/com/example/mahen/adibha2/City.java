@@ -91,10 +91,12 @@ public class City extends AppCompatActivity {
         per_kmTxt = findViewById(R.id.per_km);
         fareTxt = findViewById(R.id.fare);
         dropLocTxt=findViewById(R.id.rentaldrop);
+
         //listview initial
 //        listView = findViewById(R.id.packdetails);
 //        listView.setScrollBarSize(8);
 //        listView.setScrollContainer(false);
+
         //getting shared preferences
         SharedPreferences userpref;
         userpref = getSharedPreferences(USER_PREFS, MODE_PRIVATE);
@@ -112,6 +114,7 @@ public class City extends AppCompatActivity {
         dateonTxt.setText(dateon);
         timeatTxt.setText(timeat);
         dropLocTxt.setText(intent.getStringExtra("drop"));
+
         //initialiseing databse
         yourrides = new dbHelper(this);
 

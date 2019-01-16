@@ -43,6 +43,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -360,6 +361,7 @@ public class rental extends AppCompatActivity {
         mDay = c.get(Calendar.DAY_OF_MONTH);
         mHour = c.get(Calendar.HOUR_OF_DAY);
         mMinute = c.get(Calendar.MINUTE);
+
         final TimePickerDialog timePickerDialog2 = new TimePickerDialog(rental.this,
                 new TimePickerDialog.OnTimeSetListener() {
 
@@ -367,7 +369,10 @@ public class rental extends AppCompatActivity {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay,
                                           int minute) {
-                        timeatTxt.setText(String.format("%d:%d", hourOfDay, minute));
+
+//                        SimpleDateFormat timeat= new SimpleDateFormat("HH:mm");
+
+                        timeatTxt.setText(hourOfDay+":"+minute);
                     }
 
                 }, mHour, mMinute, false);
@@ -379,11 +384,12 @@ public class rental extends AppCompatActivity {
                     @SuppressLint("DefaultLocale")
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        dateonTxt.setText(String.format("%d-%d-%d", dayOfMonth, monthOfYear + 1, year));
+
+//                        SimpleDateFormat dateof = new SimpleDateFormat("dd-MM-yyyy");
+                        dateonTxt.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
                     }
 
                 }, mYear, mMonth, mDay);
-
 
         datePickerDialog2.show();
 
