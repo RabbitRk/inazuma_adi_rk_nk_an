@@ -52,8 +52,12 @@ public class YourRides extends AppCompatActivity {
         database = new dbHelper(this);
 
         database.insertdata("1", "11.09.2108", "Rental", "Auto", "Cuddalore", "45km");
+        database.insertdata("1", "11.09.2108", "Rental", "Auto", "Cuddalore", "45km");
+        database.insertdata("1", "11.09.2108", "Rental", "Auto", "Cuddalore", "45km");
+        database.insertdata("1", "11.09.2108", "Rental", "Auto", "Cuddalore", "45km");
 
         productAdapter = database.getdata();
+
         recycler = new yourRidesAdapter(productAdapter);
 
         Log.i("HIteshdata", "" + productAdapter);

@@ -6,8 +6,15 @@ public class recycleAdapter{
     public String book_id;
     public String origin, destination;
     public String v_type;
-
-
+//
+//    public recycleAdapter(String timeat, String travel_type, String book_id, String origin, String destination, String v_type) {
+//        this.timeat = timeat;
+//        this.travel_type = travel_type;
+//        this.book_id = book_id;
+//        this.origin = origin;
+//        this.destination = destination;
+//        this.v_type = v_type;
+//    }
 
     public String getV_type() {
         return v_type;
