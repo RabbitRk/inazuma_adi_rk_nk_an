@@ -2,38 +2,38 @@ package com.example.mahen.adibha2;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
-import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.dx.dxloadingbutton.lib.LoadingButton;
 import com.example.mahen.adibha2.DBhelper.dbHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -42,24 +42,28 @@ import static com.example.mahen.adibha2.Preferences.PrefsManager.USER_NAME;
 import static com.example.mahen.adibha2.Preferences.PrefsManager.USER_PREFS;
 
 public class City extends AppCompatActivity {
-//    RecyclerView packView;
+    //    RecyclerView packView;
     private int mYear, mMonth, mDay, mHour, mMinute;
     Boolean check_time = false, check_date = false;
 
-    String pickupLocation, dateon, timeat;
+    String pickupLocation, dropLocation, dateon, timeat;
+    String oriLat, oriLng, destLat, destLng, travel_type;
 //    ArrayList<String> base_fare_p = new ArrayList<>(Arrays.asList("399", "599", "899", "1299", "1699","1999", "2299"));
 
     String userid = "", v_type = "";
-    String fare;
-    String fare1;
-    String fare2;
+    String base_fare;
+    String distanceto;
+    String duration;
+    String user_id;
 
-    TextView pickupLocTxt, dateonTxt, timeatTxt, changeval, fareTxt, per_kmTxt, per_hrTxt,dropLocTxt;
-//    ListView listView;
+    TextView pickupLocTxt, dateonTxt, timeatTxt, changeval, fareTxt, distanceTxt, durationTxt, dropLocTxt;
+    //    ListView listView;
     String packageid;
 
     dbHelper yourrides;
     String datetime;
+
+    SharedPreferences userpref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,14 +87,14 @@ public class City extends AppCompatActivity {
         });
 
         //textview initialization
-        pickupLocTxt = findViewById(R.id.rentalpickup);
+        pickupLocTxt = findViewById(R.id.cityPickup);
+        dropLocTxt = findViewById(R.id.cityDrop);
         dateonTxt = findViewById(R.id.dateon);
         timeatTxt = findViewById(R.id.timeat);
         changeval = findViewById(R.id.changedate);
-        per_hrTxt = findViewById(R.id.per_hr);
-        per_kmTxt = findViewById(R.id.per_km);
+        distanceTxt = findViewById(R.id.distance);
+        durationTxt = findViewById(R.id.duration);
         fareTxt = findViewById(R.id.fare);
-        dropLocTxt=findViewById(R.id.rentaldrop);
 
         //listview initial
 //        listView = findViewById(R.id.packdetails);
@@ -104,16 +108,22 @@ public class City extends AppCompatActivity {
 
         //getting intent
         Intent intent = getIntent();
-        pickupLocation = intent.getStringExtra("pick");
+        pickupLocation = intent.getStringExtra("pick_up");
+        dropLocation = intent.getStringExtra("drop");
         dateon = intent.getStringExtra("date");
         timeat = intent.getStringExtra("time");
         v_type = intent.getStringExtra("v_type");
+        travel_type = intent.getStringExtra("travel_type");
+        oriLat = intent.getStringExtra("ori_lat");
+        oriLng = intent.getStringExtra("ori_lng");
+        destLat = intent.getStringExtra("dest_lat");
+        destLng = intent.getStringExtra("dest_lng");
 
         //initializing textviews
         pickupLocTxt.setText(pickupLocation);
+        dropLocTxt.setText(dropLocation);
         dateonTxt.setText(dateon);
         timeatTxt.setText(timeat);
-        dropLocTxt.setText(intent.getStringExtra("drop"));
 
         //initialiseing databse
         yourrides = new dbHelper(this);
@@ -130,8 +140,10 @@ public class City extends AppCompatActivity {
 //        packView.setAdapter(cardAdapter);
 
 
-        switch (v_type)
-        {
+        switch (v_type) {
+            case "Auto":
+                v_type = "1";
+                break;
             case "Prime":
                 v_type = "2";
                 break;
@@ -142,95 +154,105 @@ public class City extends AppCompatActivity {
                 break;
         }
 
-    }
-
-
-    public void confirmAlert(String fare, String fare1, String fare2) {
-//        LayoutInflater inflater = getLayoutInflater();
-//        View alertLayout = inflater.inflate(R.layout.rental_bottom_sheet, null);
-//        TextView base_fare = alertLayout.findViewById(R.id.base_fare);
-//        TextView exclusive_km = alertLayout.findViewById(R.id.exclusive_km);
-//        TextView exclusive_hr = alertLayout.findViewById(R.id.exclusive_hr);
-//
-//        base_fare.setText(fare);
-//        exclusive_km.setText(fare2);
-//        exclusive_hr.setText(fare1);
-//
-//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        builder.setTitle("Confirm Booking");
-//        builder.setView(alertLayout);
-//        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialogInterface, int i) {
-//
-//                confirmBooking(loc,datetime,packageid,vehicle_id);
-//
-//            }
-//        });
-//        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialogInterface, int i) {
-////                Toast.makeText(getApplicationContext(), "Progress is " + seekBar.getProgress(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//        builder.show();
-        per_hrTxt.setText(fare1);
-        per_kmTxt.setText(fare2);
-        fareTxt.setText(fare);
-
+        getuserPrefs();
+        getCurrentDateTime();
+        getDetails();
 
     }
 
-    private void confirmBooking(final String loc, final String datetime, final String packagei, final String traveltype) {
-
-//        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.CUSTOMER_RENTAL_BOOK, new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-//
-//                Log.i("Responce......outside", response);
-//
-//                if (response.equalsIgnoreCase("success")) {
-//                    Log.i("Responce....in", response);
-//                    Toast.makeText(getApplicationContext(), "Your booking placed", Toast.LENGTH_SHORT).show();
-//                } else {
-//                    Log.i("Responce.............", response);
-//                    Toast.makeText(getApplicationContext(), "Responce is  " + response, Toast.LENGTH_SHORT).show();
-//                    Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Log.i("Error", "volley response error");
-//                Toast.makeText(getApplicationContext(), "Responce error failed   " + error.getMessage(), Toast.LENGTH_LONG).show();
-//            }
-//        }) {
-//            @Override
-//            protected Map<String, String> getParams() {
-//                Map<String, String> params = new HashMap<>();
-//
-//                params.put("CUS_ID", userid);
-//                params.put("BOOK_TIME", datetime);
-//                params.put("ORIGIN", loc);
-//                params.put("TRAVEL_TYPE", v_type);
-//                params.put("PACKAGE_ID", packageid);
-//                params.put("FARE", fare);
-//
-//                Log.i("LNG", traveltype);
-//                Log.i("LNG", loc);
-//                Log.i("LNG", datetime);
-//                Log.i("LNG", packagei);
-//                return params;
-//
-//            }
-//        };
-//
-//        //inseting into  the iteluser table
-//        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-//        requestQueue.add(stringRequest);
+    private void getCurrentDateTime() {
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat dft = new SimpleDateFormat("HH:mm");
+        String rideNow_date = df.format(c.getTime());
+        String rideNow_time = dft.format(c.getTime());
+        dateonTxt.setText(rideNow_date);
+        timeatTxt.setText(rideNow_time);
     }
+
+    private void getuserPrefs() {
+        userpref = getSharedPreferences(USER_PREFS, MODE_PRIVATE);
+
+        user_id = userpref.getString(USER_NAME, "");
+
+        if ("".equals(user_id))
+        {
+            Toast.makeText(this, "User ID is not valid", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void getDetails() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.DISTANCE_CALC, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                if (!response.equals("")) {
+                    Log.i("Responce.............", response);
+                    try {
+                        JSONArray arr = new JSONArray(response);
+                        JSONObject jb = arr.getJSONObject(0);
+                        distanceto = jb.getString("distance");
+                        duration = jb.getString("duration");
+                        base_fare = jb.getString("fare");
+
+                        distanceTxt.setText(distanceto);
+                        durationTxt.setText(duration);
+                        fareTxt.setText(String.valueOf(base_fare));
+
+                        Log.i("distance.......", distanceto);
+                        Log.i("duration.......", duration);
+                        Log.i("fare.......", base_fare);
+
+//                        confirmAlert(base_fare, duration, distanceto);
+
+                    } catch (JSONException e) {
+                        Log.i("Error on catch.....", e.getMessage());
+                        e.printStackTrace();
+                    }
+                } else {
+                    Log.i("Responce.............", response);
+                    Toast.makeText(getApplicationContext(), "Responce is  " + response, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("Error", "volley response error");
+                Toast.makeText(getApplicationContext(), "Responce error failed   " + error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+
+                params.put("ORIGIN_LAT", oriLat);
+                params.put("ORIGIN_LNG", oriLng);
+                params.put("DESTINATION_LAT", destLat);
+                params.put("DESTINATION_LNG", destLng);
+                params.put("VEHICLE_TYPE", v_type);
+
+                Log.i("ORIGIN_LAT", oriLat);
+                Log.i("ORIGIN_LNG", oriLng);
+                Log.i("DESTINATION_LAT", destLat);
+                Log.i("DESTINATION_LNG", destLng);
+                Log.i("VEHICLE_TYPE", v_type);
+                return params;
+            }
+        };
+
+        //inseting into  the iteluser table
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(stringRequest);
+    }
+
+
+    public void confirmAlert(String base_fare, String distance, String duration) {
+
+
+    }
+
 
     // Opens Time and Date On Click
     public void timeChange(View view) {
@@ -247,7 +269,7 @@ public class City extends AppCompatActivity {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay,
                                           int minute) {
-
+                        timeatTxt.setText(hourOfDay+":"+minute);
                     }
 
                 }, mHour, mMinute, false);
@@ -258,7 +280,7 @@ public class City extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker view, int year,
                                           int monthOfYear, int dayOfMonth) {
-//                                                datein.setText(String.format("%d-%d-%d", dayOfMonth, monthOfYear + 1, year));
+                                                dateonTxt.setText(String.format("%d-%d-%d", dayOfMonth, monthOfYear + 1, year));
 //                                Toast.makeText(RentalView.this,dayOfMonth + "-" + (monthOfYear + 1) + "-" + year,Toast.LENGTH_SHORT).show();
                     }
 
@@ -269,30 +291,80 @@ public class City extends AppCompatActivity {
 
     }
 
-    public void getPackage(View view) {
-        TextView value = view.findViewById(R.id.rentalpickup);//Changed for Temporary use   -Naveen
-        String val = value.getText().toString();
-        Toast.makeText(this, "hello toast..." + val, Toast.LENGTH_SHORT).show();
-    }
-
     public void confirmBooking(View view) {
 
-        datetime = dateon+" "+timeat;
+        final LoadingButton confirm = findViewById(R.id.booking);
+        confirm.startLoading(); //start loading
+        new android.os.Handler().postDelayed(
+                new Runnable() {
+                    public void run() {
+                        //if details  is true
+                        confirm.loadingSuccessful();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.CUSTOMER_RENTAL_BOOK, new Response.Listener<String>() {
+                        new android.os.Handler().postDelayed(
+                                new Runnable() {
+                                    public void run() {
+                                        confirm.setEnabled(true);
+                                        reg();
+                                    }
+                                }, 1000);
+                    }
+                }, 1500);
+
+
+    }
+
+    private void reg() {
+
+        LayoutInflater inflater = getLayoutInflater();
+        View alertLayout = inflater.inflate(R.layout.city_booking_confirm, null);
+        final TextView basefareTxt = alertLayout.findViewById(R.id.baseFare);
+        final TextView durationTxt = alertLayout.findViewById(R.id.duration);
+        final TextView distanceTxt = alertLayout.findViewById(R.id.distance);
+
+        basefareTxt.setText(base_fare);
+        durationTxt.setText(duration);
+        distanceTxt.setText(distanceto);
+
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Info");
+        // this is set the view from XML inside AlertDialog
+        alert.setView(alertLayout);
+        // disallow cancel of AlertDialog on click of back button and outside touch
+        alert.setCancelable(false);
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getBaseContext(), "Cancel clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        alert.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                citybooking();
+            }
+        });
+        AlertDialog dialog = alert.create();
+        dialog.show();
+    }
+
+    public void citybooking() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.CUSTOMER_CITY_BOOK, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
-                Log.i("Responce......outside", response);
+                Log.i("Responce.............", response);
 
-                if (response.equalsIgnoreCase("success")) {
-                    Log.i("Responce....in", response);
-                    Toast.makeText(getApplicationContext(), "Your booking placed", Toast.LENGTH_SHORT).show();
+                if (response.equals("success")) {
+                    Toast.makeText(getApplicationContext(), "Booked Successfully", Toast.LENGTH_SHORT).show();
                 } else {
                     Log.i("Responce.............", response);
                     Toast.makeText(getApplicationContext(), "Responce is  " + response, Toast.LENGTH_SHORT).show();
-                    Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
-                    yourRides();
+                    Toast.makeText(getApplicationContext(), "Failed..." + response, Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -304,23 +376,17 @@ public class City extends AppCompatActivity {
             }
         }) {
             @Override
-            protected Map<String, String> getParams() {
+            protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
 
-                params.put("CUS_ID", userid);
-                params.put("BOOK_TIME", datetime);
+                params.put("CUS_ID", user_id);
                 params.put("ORIGIN", pickupLocation);
-                params.put("TRAVEL_TYPE", v_type);
-                params.put("PACKAGE_ID", packageid);
-                params.put("FARE", fare);
-
-//                Log.i("LNG", traveltype);
-//                Log.i("LNG", loc);
-//                Log.i("LNG", datetime);
-//                Log.i("LNG", packagei);
+                params.put("DESTINATION", dropLocation);
+                params.put("BASE_FARE", base_fare);
+                params.put("KMETER", distanceto);
+                params.put("VEHICLE_ID", v_type);
 
                 return params;
-
             }
         };
 
@@ -329,8 +395,4 @@ public class City extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    private void yourRides() {
-        yourrides.insertdata("1",datetime, "Rental",v_type, pickupLocation,"");
-        Log.i("value","inserted");
-    }
 }

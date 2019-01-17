@@ -162,6 +162,7 @@
             android:layout_marginEnd="30dp"
             android:layout_gravity="center"
             app:lb_btnText="@string/Register_btn"
+            android:onClick="register"
             android:fontFamily="serif"
             app:lb_btnColor="@color/textline"
             app:lb_resetAfterFailed="true"/>

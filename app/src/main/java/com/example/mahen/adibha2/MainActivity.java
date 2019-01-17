@@ -1,14 +1,18 @@
 package com.example.mahen.adibha2;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -56,9 +60,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void create_account(View view) {
-        Intent ac_page = new Intent(this, Main2Activity.class);
-        startActivity(ac_page);
+        Intent register = new Intent(this, Main2Activity.class);
+        startActivity(register);
     }
+
 
     public void forgot(View view) {
 //        Intent forgot = new Intent(this,Forgot_password.class);

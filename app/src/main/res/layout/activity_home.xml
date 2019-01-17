@@ -120,7 +120,7 @@
                             android:maxLines="1"
                             android:layout_centerInParent="true"
                             android:gravity="center|center_vertical"
-                            android:onClick="Searchpickup"
+                            android:onClick="Searchdrop"
                             android:scrollHorizontally="true"
                             android:textColorHint="@color/text_color"
                             android:textSize="12sp"
@@ -154,7 +154,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/ride_now"
+                    android:id="@+id/rental"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -173,7 +173,7 @@
                     android:background="@color/colorAccent" />
 
                 <Button
-                    android:id="@+id/button4"
+                    android:id="@+id/city"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -192,7 +192,7 @@
                     android:background="@color/colorAccent" />
 
                 <Button
-                    android:id="@+id/button5"
+                    android:id="@+id/outstation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

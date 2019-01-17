@@ -22,7 +22,7 @@ public class dbHelper extends SQLiteOpenHelper {
     public static String v_type = "company";
     public static String ori = "city";
     public static String dest = "country";
-    String br;
+    String br = "";
 
     public dbHelper(Context context) {
         super(context, DATABASE, null, 1);

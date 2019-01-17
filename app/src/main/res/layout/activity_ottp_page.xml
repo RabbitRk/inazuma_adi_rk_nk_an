@@ -53,6 +53,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="30dp"
             android:layout_gravity="center"
+            android:onClick="otpVerification"
             app:lb_btnText="Submit"
             app:lb_btnColor="@color/textline"
             app:lb_resetAfterFailed="true"/>

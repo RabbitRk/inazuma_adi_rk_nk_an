@@ -532,19 +532,22 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
         if (isUp) {
             slideDown(myView);
             switch (view.getId()) {
-                case R.id.ride_now:
+                case R.id.rental:
                     disableAuto(false);
                     type = "rental";
+                    dropVisiblity(type);
                     getnavigation(type);
                     break;
-                case R.id.button4:
+                case R.id.city:
                     disableAuto(true);
                     type = "city";
+                    dropVisiblity(type);
                     getCitynavigation(type);
                     break;
-                case R.id.button5:
+                case R.id.outstation:
                     disableAuto(true);
                     type = "outstation";
+                    dropVisiblity(type);
                     getnavigation(type);
                     break;
 
@@ -553,25 +556,45 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
         } else {
             slideUp(myView);
             switch (view.getId()) {
-                case R.id.ride_now:
+                case R.id.rental:
                     disableAuto(false);
                     type = "rental";
+                    dropVisiblity(type);
                     getnavigation(type);
                     break;
-                case R.id.button4:
+                case R.id.city:
                     disableAuto(true);
                     type = "city";
+                    dropVisiblity(type);
                     getCitynavigation(type);
                     break;
-                case R.id.button5:
+                case R.id.outstation:
                     disableAuto(true);
                     type = "outstation";
+                    dropVisiblity(type);
                     getnavigation(type);
                     break;
             }
 
         }
         isUp = !isUp;
+    }
+
+    private void dropVisiblity(String type) {
+        switch (type) {
+            case "rental":
+                if (dropLocTxt.getVisibility() == View.VISIBLE)
+                    dropLocTxt.setVisibility(View.GONE);
+                break;
+            case "city":
+                if (dropLocTxt.getVisibility() == View.GONE)
+                    dropLocTxt.setVisibility(View.VISIBLE);
+                break;
+            case "outstation":
+                if (dropLocTxt.getVisibility() == View.GONE)
+                    dropLocTxt.setVisibility(View.VISIBLE);
+                break;
+        }
     }
 
 
@@ -624,6 +647,7 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
             }
         });
     }
+
     private void getCitynavigation(String typeof) {
         Log.i("my_tag", "Welcome");
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
