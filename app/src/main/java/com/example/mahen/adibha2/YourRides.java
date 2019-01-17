@@ -13,15 +13,16 @@ import android.view.View;
 import com.example.mahen.adibha2.DBhelper.dbHelper;
 import com.example.mahen.adibha2.DBhelper.recycleAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
-class YourRides extends AppCompatActivity {
+public class YourRides extends AppCompatActivity {
 
     String val;
     dbHelper database;
     RecyclerView recyclerView;
-    recycleAdapter recycler;
-    List<recycleAdapter> datamodel;
+    yourRidesAdapter recycler;
+    List<recycleAdapter> productAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,20 +45,23 @@ class YourRides extends AppCompatActivity {
             }
         });
 
+        recyclerView = findViewById(R.id.your_rides);
+
+        productAdapter = new ArrayList<>();
         //code begins
         database = new dbHelper(this);
-        datamodel=  database.getdata();
-        //Changed for Temporary use
-        //                         -Naveen
-//        recycler =new recycleAdapter(datamodel);
 
+        database.insertdata("1", "11.09.2108", "Rental", "Auto", "Cuddalore", "45km");
 
-        Log.i("HIteshdata",""+datamodel);
-        RecyclerView.LayoutManager reLayoutManager =new LinearLayoutManager(getApplicationContext());
+        productAdapter = database.getdata();
+        recycler = new yourRidesAdapter(productAdapter);
+
+        Log.i("HIteshdata", "" + productAdapter);
+
+        RecyclerView.LayoutManager reLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(reLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        //Changed for Temporary use
-        //                      -Naveen
-//        recyclerView.setAdapter(recycler);
+
+        recyclerView.setAdapter(recycler);
     }
 }

@@ -253,7 +253,6 @@ public class City extends AppCompatActivity {
 
     }
 
-
     // Opens Time and Date On Click
     public void timeChange(View view) {
         final Calendar c = Calendar.getInstance();

@@ -45,11 +45,11 @@ public class recycleAdapter{
         this.book_id = book_id;
     }
 
-    public void setOrigin(String origin) {
+    void setOrigin(String origin) {
         this.origin = origin;
     }
 
-    public void setDestination(String destination) {
+    void setDestination(String destination) {
         this.destination = destination;
     }
 

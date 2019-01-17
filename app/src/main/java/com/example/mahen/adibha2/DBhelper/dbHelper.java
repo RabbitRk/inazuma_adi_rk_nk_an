@@ -16,12 +16,12 @@ public class dbHelper extends SQLiteOpenHelper {
 
     public static String DATABASE = "your_rides.db";
     public static String TABLE = "rides";
-    public static String timeat = "name";
-    private static String bookid = "company";
-    public static String travel_type = "company";
-    public static String v_type = "company";
-    public static String ori = "city";
-    public static String dest = "country";
+    public static String timeat = "timeat";
+    public static String bookid = "bookid";
+    public static String travel_type = "travel_type";
+    public static String v_type = "v_type";
+    public static String ori = "ori";
+    public static String dest = "dest";
     String br = "";
 
     public dbHelper(Context context) {
@@ -62,6 +62,7 @@ public class dbHelper extends SQLiteOpenHelper {
         recycleAdapter dataModel = null;
         while (cursor.moveToNext()) {
             dataModel= new recycleAdapter();
+
             String bookid = cursor.getString(cursor.getColumnIndexOrThrow("bookid"));
             String travel_type = cursor.getString(cursor.getColumnIndexOrThrow("travel_type"));
             String v_type = cursor.getString(cursor.getColumnIndexOrThrow("v_type"));
