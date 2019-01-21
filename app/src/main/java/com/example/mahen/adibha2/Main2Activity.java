@@ -155,7 +155,7 @@ public class Main2Activity extends AppCompatActivity {
 
                         } catch (JSONException e) {
                             Log.i(LOG_TAG, "json error.............................." + e.getMessage());
-                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Mobile number already exists! Try Again...", Toast.LENGTH_LONG).show();
                         }
 
                     }

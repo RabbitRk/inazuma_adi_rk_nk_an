@@ -31,4 +31,7 @@
     <string name="title_activity_rental">Rental Booking</string>
     <string name="terms"><u><font color="#ffd700">Terms and Conditions</font></u></string>
     <string name="terms_and_conditions"><u><font color="#ffd700">Terms and Conditions</font></u></string>
+    <string name="title_activity_outstation">Outstation Booking</string>
+    <string name="title_activity_your_rides">Your rides</string>
+    <string name="title_activity_city">City Booking</string>
 </resources>

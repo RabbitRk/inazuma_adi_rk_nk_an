@@ -28,6 +28,7 @@ public class yourRidesAdapter extends RecyclerView.Adapter<yourRidesAdapter.hold
 
     @Override
     public void onBindViewHolder(@NonNull holder holder, int i) {
+
         recycleAdapter dataModel=dataModelArrayList.get(i);
 
         holder.book_id.setText(dataModel.getBook_id());

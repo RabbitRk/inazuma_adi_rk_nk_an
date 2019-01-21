@@ -62,9 +62,11 @@ import java.util.List;
 import java.util.Locale;
 
 import com.example.mahen.adibha2.Preferences.PrefsManager;
-import com.morsebyte.shailesh.twostagerating.FeedbackWithRatingReceivedListener;
-import com.morsebyte.shailesh.twostagerating.TwoStageRate;
 
+import static com.example.mahen.adibha2.Preferences.PrefsManager.ID_KEY;
+import static com.example.mahen.adibha2.Preferences.PrefsManager.USER_EMAIL;
+import static com.example.mahen.adibha2.Preferences.PrefsManager.USER_NAME;
+import static com.example.mahen.adibha2.Preferences.PrefsManager.USER_PHONE;
 import static com.example.mahen.adibha2.Preferences.PrefsManager.USER_PREFS;
 
 public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
@@ -77,7 +79,7 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
 //    TextView userTxt, useridTxt, phoneTxt, emailTxt;
 
     //get pref variables
-//    String user,idd,phone,emaill;
+    String user,idd,phone,emaill;
 
     //variable declaration rk
     private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
@@ -347,16 +349,16 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
     public void getPrefsdetails() {
         userpref = getSharedPreferences(USER_PREFS, MODE_PRIVATE);
 
-//        user = userpref.getString(USER_NAME,"");
-//        idd = userpref.getString(ID_KEY,"");
-//        phone = userpref.getString(USER_EMAIL,"");
-//        emaill = userpref.getString(USER_PHONE,"");
+        user = userpref.getString(USER_NAME,"");
+        idd = userpref.getString(ID_KEY,"");
+        phone = userpref.getString(USER_EMAIL,"");
+        emaill = userpref.getString(USER_PHONE,"");
 //
 //        userTxt.setText(user);
 //        useridTxt.setText(idd);
 //        phoneTxt.setText(phone);
 //        emailTxt.setText(emaill);
-//        Log.i(LOG_TAG,"get preference Hid.............."+idd);
+        Log.i(LOG_TAG,"prefs:"+idd+" "+user+" "+phone+" "+emaill);
     }
 
 
@@ -548,7 +550,7 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
                     disableAuto(true);
                     type = "outstation";
                     dropVisiblity(type);
-                    getnavigation(type);
+                    getOutstation(type);
                     break;
 
             }
@@ -572,12 +574,61 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
                     disableAuto(true);
                     type = "outstation";
                     dropVisiblity(type);
-                    getnavigation(type);
+                    getOutstation(type);
                     break;
             }
 
         }
         isUp = !isUp;
+    }
+
+    private void getOutstation(String typea) {
+
+        Log.i("my_tag", "Welcome");
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                Log.i("my_tag", "Welcome2");
+                switch (menuItem.getTitle().toString()) {
+
+                    case "Prime":
+                        outstationBottomSheet bottomSheet1 = new outstationBottomSheet();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("pickn", pickupLocTxt.getText().toString());
+                        bundle.putString("dropn", dropLocTxt.getText().toString());
+
+                        bundle.putString("ori_lat", String.valueOf(origin.latitude));
+                        bundle.putString("ori_lng", String.valueOf(origin.longitude));
+                        bundle.putString("dest_lat", String.valueOf(dest.latitude));
+                        bundle.putString("dest_lng", String.valueOf(dest.longitude));
+
+                        bundle.putString("vehicle", "Prime");
+                        bundle.putString("travel_type", type);
+                        bottomSheet1.setArguments(bundle);
+                        bottomSheet1.show(getSupportFragmentManager(), "exampleBottomSheet");
+                        break;
+
+                    case "SUV":
+                        outstationBottomSheet bottomSheet2 = new outstationBottomSheet();
+                        Bundle bundle1 = new Bundle();
+                        bundle1.putString("pickn", pickupLocTxt.getText().toString());
+                        bundle1.putString("dropn", dropLocTxt.getText().toString());
+
+                        bundle1.putString("ori_lat", String.valueOf(origin.latitude));
+                        bundle1.putString("ori_lng", String.valueOf(origin.longitude));
+                        bundle1.putString("dest_lat", String.valueOf(dest.latitude));
+                        bundle1.putString("dest_lng", String.valueOf(dest.longitude));
+
+                        bundle1.putString("vehicle", "SUV");
+                        bundle1.putString("travel_type", type);
+                        bottomSheet2.setArguments(bundle1);
+                        bottomSheet2.show(getSupportFragmentManager(), "exampleBottomSheet");
+                        break;
+                }
+                return true;
+            }
+        });
+
     }
 
     private void dropVisiblity(String type) {

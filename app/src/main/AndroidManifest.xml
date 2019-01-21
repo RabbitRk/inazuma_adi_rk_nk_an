@@ -7,7 +7,6 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- Map permissions -->
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -24,7 +23,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name="MainActivity"
+            android:name="SplastScreen"
             android:configChanges="orientation"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -36,6 +35,10 @@
         </activity>
 
         <!-- Other activities to navigate through -->
+        <activity
+            android:name="MainActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
         <activity
             android:name="HomeScreen"
             android:configChanges="orientation"
@@ -53,17 +56,23 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name="SplastScreen"
-            android:label="@string/title_activity_maps" />
-        <activity
             android:name="rental"
             android:label="@string/title_activity_rental"
             android:theme="@style/Login_page" />
+
         <activity android:name="PlaceSelector" />
         <activity android:name="Terms" />
         <activity android:name="about" />
-        <activity android:name="City" />
-        <activity android:name="YourRides" />
+
+        <activity
+            android:name="City"
+            android:label="@string/title_activity_city" />
+        <activity
+            android:name="YourRides"
+            android:label="@string/title_activity_your_rides" />
+        <activity
+            android:name="outstation"
+            android:label="@string/title_activity_outstation" />
     </application>
 
 </manifest>

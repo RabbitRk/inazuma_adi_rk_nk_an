@@ -57,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
         lb = findViewById(R.id.loading_btn);
         lb.setTypeface(Typeface.SERIF);
 
+
+
     }
 
     public void create_account(View view) {
@@ -66,10 +68,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void forgot(View view) {
-//        Intent forgot = new Intent(this,Forgot_password.class);
-//        startActivity(forgot);
-        Intent shortCut = new Intent(this, HomeScreen.class);
-        startActivity(shortCut);
+        Intent forgot = new Intent(this,Forgot_password.class);
+        startActivity(forgot);
+//        Intent shortCut = new Intent(this, HomeScreen.class);
+//        startActivity(shortCut);
 
     }
 

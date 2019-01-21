@@ -20,11 +20,6 @@ public class PrefsManager {
     public static final String USER_PHONE = "USER_PHONE";
     public static final String USER_EMAIL = "USER_EMAIL";
 
-
-
-
-
-
     @SuppressLint("CommitPrefEdits")
     public PrefsManager(Context context) {
         // shared pref mode
@@ -45,6 +40,7 @@ public class PrefsManager {
     public boolean isFirstTimeLaunch() {
         return pref.getBoolean(LOGIN, false);
     }
+
      public void userPreferences(String id, String username, String phonenumber, String email) {
         user_editor.putString(ID_KEY,id);
         user_editor.putString(USER_NAME,username);

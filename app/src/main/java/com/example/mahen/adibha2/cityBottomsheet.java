@@ -12,7 +12,7 @@ import android.widget.Button;
 
 public class cityBottomsheet extends BottomSheetDialogFragment {
 
-    Button rideNow;
+    Button rideNow, rideLater;
 
     static String pick_up_loc= null;
     static String drop_loc= null;
@@ -27,6 +27,7 @@ public class cityBottomsheet extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.city_bottom_sheet, container, false);
+
         rideNow = v.findViewById(R.id.ride_now);
 
         assert getArguments() != null;
@@ -56,6 +57,7 @@ public class cityBottomsheet extends BottomSheetDialogFragment {
 
             }
         });
+
         return v;
     }
 }

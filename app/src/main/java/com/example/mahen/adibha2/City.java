@@ -247,12 +247,6 @@ public class City extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-
-    public void confirmAlert(String base_fare, String distance, String duration) {
-
-
-    }
-
     // Opens Time and Date On Click
     public void timeChange(View view) {
         final Calendar c = Calendar.getInstance();
