@@ -368,7 +368,8 @@
                                 android:text="Change"
                                 android:onClick="timeChangeout"
                                 android:textColor="@color/colorAccent"
-                                android:textSize="13sp" />
+                                android:textSize="13sp"
+                                tools:ignore="OnClick" />
                         </LinearLayout>
 
                         <com.dx.dxloadingbutton.lib.LoadingButton
