@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -26,6 +28,8 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.example.mahen.adibha2.Forgot_password.isEmailValid;
 
 public class Main2Activity extends AppCompatActivity {
 
@@ -51,6 +55,122 @@ public class Main2Activity extends AppCompatActivity {
         password = findViewById(R.id.password);
         c_password = findViewById(R.id.confirm_pass);
         phone_number = findViewById(R.id.phonenumber);
+        // checks username is entered or not
+        username.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (TextUtils.isEmpty(username.getText())) {
+                    username.setError("Enter the user name");
+                    username.requestFocus();
+
+                }
+
+            }
+        });
+    //checks password is less than 6
+        password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (password.getText().length()<6) {
+                    password.setError("Password must contain minimum 6 characters");
+                    password.requestFocus();
+
+                }
+
+            }
+        });
+     //checks confirm password is less than 6
+        c_password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (c_password.getText().length()<6) {
+                    c_password.setError("Password must contain minimum 6 characters");
+                    c_password.requestFocus();
+
+                }
+
+            }
+        });
+        //checks phone number is less than 10
+        phone_number.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (phone_number.getText().length()<10) {
+                    phone_number.setError("Please enter valid Phone Number");
+                    phone_number.requestFocus();
+
+                }
+
+            }
+        });
+        //checks whether it is in email format
+        email.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(!isEmailValid(email.getText().toString())){//isEmailValid is given in forgot_password page as public
+                    email.setError("Please enter valid email");
+                    email.requestFocus();
+
+                }
+
+            }
+        });
+
 
         lb = findViewById(R.id.loading_btn);
         lb.setTypeface(Typeface.SERIF);

@@ -7,10 +7,14 @@ import android.graphics.Typeface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     String passTxt, phoneTxt;
     String PuserTxt, PemailTxt, getId;
     LoadingButton lb;
-    Boolean succes;
+    Boolean succes,ed=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +58,55 @@ public class MainActivity extends AppCompatActivity {
 
         password = findViewById(R.id.confirm_pass);
         phone_number = findViewById(R.id.phonenumber);
+
         lb = findViewById(R.id.loading_btn);
         lb.setTypeface(Typeface.SERIF);
+        phone_number.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
 
 
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (phone_number.getText().length()<10) {
+                    phone_number.setError("Please enter valid Phone Number");
+                    phone_number.requestFocus();
+
+                }
+
+            }
+        });
+
+
+        password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (password.getText().length()<6) {
+                    password.setError("Enter the password");
+                    password.requestFocus();
+
+                }
+
+            }
+        });
 
     }
 
@@ -79,7 +128,6 @@ public class MainActivity extends AppCompatActivity {
 
         passTxt = password.getText().toString().trim();
         phoneTxt = phone_number.getText().toString().trim();
-
 
         if (TextUtils.isEmpty(phoneTxt)) {
             phone_number.setError("Enter the phone number");
