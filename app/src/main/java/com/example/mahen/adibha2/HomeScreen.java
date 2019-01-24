@@ -537,19 +537,19 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
             slideDown(myView);
             switch (view.getId()) {
                 case R.id.rental:
-                    disableAuto(false);
+//                    disableAuto(false);
                     type = "rental";
                     dropVisiblity(type);
                     getnavigation(type);
                     break;
                 case R.id.city:
-                    disableAuto(true);
+//                    disableAuto(true);
                     type = "city";
                     dropVisiblity(type);
                     getCitynavigation(type);
                     break;
                 case R.id.outstation:
-                    disableAuto(true);
+//                    disableAuto(true);
                     type = "outstation";
                     dropVisiblity(type);
                     getOutstation(type);
@@ -561,19 +561,19 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
             slideUp(myView);
             switch (view.getId()) {
                 case R.id.rental:
-                    disableAuto(false);
+//                    disableAuto(false);
                     type = "rental";
                     dropVisiblity(type);
                     getnavigation(type);
                     break;
                 case R.id.city:
-                    disableAuto(true);
+//                    disableAuto(true);
                     type = "city";
                     dropVisiblity(type);
                     getCitynavigation(type);
                     break;
                 case R.id.outstation:
-                    disableAuto(true);
+//                    disableAuto(true);
                     type = "outstation";
                     dropVisiblity(type);
                     getOutstation(type);
@@ -591,7 +591,19 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 Log.i("my_tag", "Welcome2");
-                switch (menuItem.getTitle().toString()) {
+
+                    switch (menuItem.getTitle().toString()) {
+                        case "Auto":
+                            AlertDialog alertDialog = new AlertDialog.Builder(HomeScreen.this).create();
+                            alertDialog.setMessage("Auto is not provided for Rental");
+                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+                            alertDialog.show();
+                            break;
 
                     case "Prime":
                         outstationBottomSheet bottomSheet1 = new outstationBottomSheet();
@@ -676,9 +688,8 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
                 Log.i("my_tag", "Welcome2");
                 switch (menuItem.getTitle().toString()) {
                     case "Auto":
-                        AlertDialog alertDialog = new AlertDialog.Builder(getApplicationContext()).create();
-
-                        alertDialog.setMessage("A");
+                        AlertDialog alertDialog = new AlertDialog.Builder(HomeScreen.this).create();
+                        alertDialog.setMessage("Auto is not provided for Outstation");
                         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
@@ -686,7 +697,7 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
                                     }
                                 });
                         alertDialog.show();
-
+                        break;
                     case "Prime":
                         BookBottomSheet bottomSheet1 = new BookBottomSheet();
                         Bundle bundle = new Bundle();
