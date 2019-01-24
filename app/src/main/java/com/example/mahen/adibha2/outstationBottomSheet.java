@@ -4,9 +4,11 @@
 package com.example.mahen.adibha2;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.TimePicker;
 
 import java.text.SimpleDateFormat;
@@ -34,6 +37,7 @@ public class outstationBottomSheet extends BottomSheetDialogFragment {
     static String ori_lng = null;
     static String dest_lat = null;
     static String dest_lng = null;
+    ImageView vehicle_icon;
 
     @Nullable
     @Override
@@ -41,6 +45,9 @@ public class outstationBottomSheet extends BottomSheetDialogFragment {
         View v = inflater.inflate(R.layout.outstation_bottom_sheet, container, false);
         rideNow = v.findViewById(R.id.ride_now2);
         rideLater = v.findViewById(R.id.rideLater);
+        vehicle_icon=v.findViewById(R.id.iconcard);
+
+
 
         assert getArguments() != null;
         pick_up_loc = getArguments().getString("pickn");
@@ -52,56 +59,95 @@ public class outstationBottomSheet extends BottomSheetDialogFragment {
         dest_lat = getArguments().getString("dest_lat");
         dest_lng = getArguments().getString("dest_lng");
 
+        switch (v_type){
+            case "Auto":
+                vehicle_icon.setImageResource(R.drawable.ic_auto_rickshaw);
+                break;
+            case "Prime":
+                vehicle_icon.setImageResource(R.drawable.ic_taxi);
+                break;
+            case "SUV":
+                vehicle_icon.setImageResource(R.drawable.ic_booking_car_model);
+                break;
+        }
+
         rideNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!pick_up_loc.equals("")) {
+                    Calendar c = Calendar.getInstance();
+                    SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                    SimpleDateFormat dft = new SimpleDateFormat("HH:mm");
+                    String rideNow_date = df.format(c.getTime());
+                    String rideNow_time = dft.format(c.getTime());
 
-                Calendar c = Calendar.getInstance();
-                SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-                SimpleDateFormat dft = new SimpleDateFormat("HH:mm");
-                String rideNow_date = df.format(c.getTime());
-                String rideNow_time = dft.format(c.getTime());
+                    Intent tocity = new Intent(getContext(), outstation.class);
+                    tocity.putExtra("pick_up", pick_up_loc);
+                    tocity.putExtra("drop", drop_loc);
+                    tocity.putExtra("v_type", v_type);
+                    tocity.putExtra("travel_type", type);
+                    tocity.putExtra("ori_lat", ori_lat);
+                    tocity.putExtra("ori_lng", ori_lng);
+                    tocity.putExtra("dest_lat", dest_lat);
+                    tocity.putExtra("dest_lng", dest_lng);
+                    tocity.putExtra("date", rideNow_date);
+                    tocity.putExtra("time", rideNow_time);
 
-                Intent tocity = new Intent(getContext(), outstation.class);
-                tocity.putExtra("pick_up", pick_up_loc);
-                tocity.putExtra("drop", drop_loc);
-                tocity.putExtra("v_type", v_type);
-                tocity.putExtra("travel_type", type);
-                tocity.putExtra("ori_lat", ori_lat);
-                tocity.putExtra("ori_lng", ori_lng);
-                tocity.putExtra("dest_lat", dest_lat);
-                tocity.putExtra("dest_lng", dest_lng);
-                tocity.putExtra("date", rideNow_date);
-                tocity.putExtra("time", rideNow_time);
-
-                startActivity(tocity);
+                    startActivity(tocity);
+                } else {
+                    AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+                    alertDialog.setTitle("No Location Found");
+                    alertDialog.setMessage("Please Select Valid Location");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+                }
             }
         });
 
         rideLater.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!pick_up_loc.equals("")) {
+                    final Calendar c = Calendar.getInstance();
+                    int mYear = 0;
+                    int mMonth = 0;
+                    int mDay = 0;
+                    final DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
+                            new DatePickerDialog.OnDateSetListener() {
 
-                final Calendar c = Calendar.getInstance();
-                int mYear = 0;
-                int mMonth= 0;
-                int mDay= 0;
-                final DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
-                        new DatePickerDialog.OnDateSetListener() {
+                                @SuppressLint("DefaultLocale")
+                                @Override
+                                public void onDateSet(DatePicker view, int year,
+                                                      int monthOfYear, int dayOfMonth) {
 
-                            @SuppressLint("DefaultLocale")
-                            @Override
-                            public void onDateSet(DatePicker view, int year,
-                                                  int monthOfYear, int dayOfMonth) {
+                                    SimpleDateFormat dateof = new SimpleDateFormat("dd-MM-yyyy");
+                                    String rideLater_date = dateof.format(c.getTime());
+                                    getTime(rideLater_date);
 
-                                SimpleDateFormat dateof = new SimpleDateFormat("dd-MM-yyyy");
-                                String rideLater_date = dateof.format(c.getTime());
-                                getTime(rideLater_date);
+                                }
+                            }, mYear, mMonth, mDay);
+                    datePickerDialog.show();
+                }
+                else {
+                    AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+                    alertDialog.setTitle("No Location Found");
+                    alertDialog.setMessage("Please Select Pickup Location");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+                }
 
-                            }
-                        }, mYear, mMonth, mDay);
-                datePickerDialog.show();
             }
+
         });
 
 

@@ -44,6 +44,7 @@
             android:maxLength="4"
             android:hint="@string/enter_otp_number"
             android:inputType="phone"
+            android:digits="0123456789"
             android:textColor="#ffff"
             android:textColorHint="#ffff"
             tools:ignore="Autofill"/>

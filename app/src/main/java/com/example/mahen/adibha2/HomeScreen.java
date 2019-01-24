@@ -1,6 +1,8 @@
 package com.example.mahen.adibha2;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
@@ -597,10 +599,10 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
                         bundle.putString("pickn", pickupLocTxt.getText().toString());
                         bundle.putString("dropn", dropLocTxt.getText().toString());
 
-                        bundle.putString("ori_lat", String.valueOf(origin.latitude));
-                        bundle.putString("ori_lng", String.valueOf(origin.longitude));
-                        bundle.putString("dest_lat", String.valueOf(dest.latitude));
-                        bundle.putString("dest_lng", String.valueOf(dest.longitude));
+//                        bundle.putString("ori_lat", String.valueOf(origin.latitude));
+//                        bundle.putString("ori_lng", String.valueOf(origin.longitude));
+//                        bundle.putString("dest_lat", String.valueOf(dest.latitude));
+//                        bundle.putString("dest_lng", String.valueOf(dest.longitude));
 
                         bundle.putString("vehicle", "Prime");
                         bundle.putString("travel_type", type);
@@ -614,10 +616,10 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
                         bundle1.putString("pickn", pickupLocTxt.getText().toString());
                         bundle1.putString("dropn", dropLocTxt.getText().toString());
 
-                        bundle1.putString("ori_lat", String.valueOf(origin.latitude));
-                        bundle1.putString("ori_lng", String.valueOf(origin.longitude));
-                        bundle1.putString("dest_lat", String.valueOf(dest.latitude));
-                        bundle1.putString("dest_lng", String.valueOf(dest.longitude));
+//                        bundle1.putString("ori_lat", String.valueOf(origin.latitude));
+//                        bundle1.putString("ori_lng", String.valueOf(origin.longitude));
+//                        bundle1.putString("dest_lat", String.valueOf(dest.latitude));
+//                        bundle1.putString("dest_lng", String.valueOf(dest.longitude));
 
                         bundle1.putString("vehicle", "SUV");
                         bundle1.putString("travel_type", type);
@@ -673,6 +675,17 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 Log.i("my_tag", "Welcome2");
                 switch (menuItem.getTitle().toString()) {
+                    case "Auto":
+                        AlertDialog alertDialog = new AlertDialog.Builder(getApplicationContext()).create();
+
+                        alertDialog.setMessage("A");
+                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                        alertDialog.show();
 
                     case "Prime":
                         BookBottomSheet bottomSheet1 = new BookBottomSheet();
@@ -712,10 +725,10 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
                         bundle0.putString("pickn", pickupLocTxt.getText().toString());
                         bundle0.putString("dropn", dropLocTxt.getText().toString());
 
-                        bundle0.putString("ori_lat", String.valueOf(origin.latitude));
-                        bundle0.putString("ori_lng", String.valueOf(origin.longitude));
-                        bundle0.putString("dest_lat", String.valueOf(dest.latitude));
-                        bundle0.putString("dest_lng", String.valueOf(dest.longitude));
+//                        bundle0.putString("ori_lat", String.valueOf(origin.latitude));
+//                        bundle0.putString("ori_lng", String.valueOf(origin.longitude));
+//                        bundle0.putString("dest_lat", String.valueOf(dest.latitude));
+//                        bundle0.putString("dest_lng", String.valueOf(dest.longitude));
 
                         bundle0.putString("vehicle", "Auto");
                         bundle0.putString("travel_type", type);
@@ -729,10 +742,10 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
                         bundle.putString("pickn", pickupLocTxt.getText().toString());
                         bundle.putString("dropn", dropLocTxt.getText().toString());
 
-                        bundle.putString("ori_lat", String.valueOf(origin.latitude));
-                        bundle.putString("ori_lng", String.valueOf(origin.longitude));
-                        bundle.putString("dest_lat", String.valueOf(dest.latitude));
-                        bundle.putString("dest_lng", String.valueOf(dest.longitude));
+//                        bundle.putString("ori_lat", String.valueOf(origin.latitude));
+//                        bundle.putString("ori_lng", String.valueOf(origin.longitude));
+//                        bundle.putString("dest_lat", String.valueOf(dest.latitude));
+//                        bundle.putString("dest_lng", String.valueOf(dest.longitude));
 
                         bundle.putString("vehicle", "Prime");
                         bundle.putString("travel_type", type);
@@ -746,11 +759,11 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
                         Bundle bundle1 = new Bundle();
                         bundle1.putString("pickn", pickupLocTxt.getText().toString());
                         bundle1.putString("dropn", dropLocTxt.getText().toString());
-
-                        bundle1.putString("ori_lat", String.valueOf(origin.latitude));
-                        bundle1.putString("ori_lng", String.valueOf(origin.longitude));
-                        bundle1.putString("dest_lat", String.valueOf(dest.latitude));
-                        bundle1.putString("dest_lng", String.valueOf(dest.longitude));
+//
+//                        bundle1.putString("ori_lat", String.valueOf(origin.latitude));
+//                        bundle1.putString("ori_lng", String.valueOf(origin.longitude));
+//                        bundle1.putString("dest_lat", String.valueOf(dest.latitude));
+//                        bundle1.putString("dest_lng", String.valueOf(dest.longitude));
 
                         bundle1.putString("vehicle", "SUV");
                         bundle1.putString("travel_type", type);

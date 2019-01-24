@@ -9,6 +9,7 @@
         android:id="@+id/mycard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cardCornerRadius="0dp"
         app:cardBackgroundColor="@color/bgcolor"
         android:paddingTop="5dp">
 
