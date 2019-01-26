@@ -220,6 +220,7 @@
         android:layout_gravity="start"
         android:background="@color/bgcolor"
         app:itemIconTint="@color/colorAccent"
+            app:headerLayout="@layout/nav_header"
         app:itemTextAppearance="@style/NavigationDrawerStyle"
         app:itemTextColor="#fff"
         app:menu="@menu/drawer_menu" />

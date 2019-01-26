@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="176dp"
+    android:layout_height="?attr/actionBarSize"
     android:background="@color/menu_bar_color"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 

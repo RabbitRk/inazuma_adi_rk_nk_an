@@ -23,7 +23,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".HomeScreen"
+            android:name=".SplastScreen"
             android:configChanges="orientation"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -36,43 +36,49 @@
 
         <!-- Other activities to navigate through -->
         <activity
-            android:name="MainActivity"
+            android:name=".MainActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name="SplastScreen"
+            android:name=".HomeScreen"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name="Main2Activity"
+            android:name=".Main2Activity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name="Forgot_password"
+            android:name=".Forgot_password"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name="Ottp_page"
+            android:name=".Ottp_page"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name="rental"
+            android:name=".rental"
             android:label="@string/title_activity_rental"
             android:theme="@style/Login_page" />
-
-        <activity android:name="PlaceSelector" />
-        <activity android:name="Terms" />
-        <activity android:name="about" />
-
+        <activity android:name=".PlaceSelector" />
+        <activity android:name=".Terms" />
+        <activity android:name=".about" />
         <activity
-            android:name="City"
+            android:name=".City"
             android:label="@string/title_activity_city" />
         <activity
-            android:name="YourRides"
+            android:name=".YourRides"
             android:label="@string/title_activity_your_rides" />
         <activity
-            android:name="outstation"
+            android:name=".outstation"
             android:label="@string/title_activity_outstation" />
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".HomeScreen">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.mahen.adibha2.HomeScreen" />
+        </activity>
     </application>
 
 </manifest>

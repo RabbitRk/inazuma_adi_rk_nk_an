@@ -381,7 +381,9 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
                 Toast.makeText(getApplicationContext(), "Your Rides Option Selected", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_support:
-                Toast.makeText(getApplicationContext(), "Support Option Selected", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "Support Option Selected", Toast.LENGTH_SHORT).show();
+                Intent intent2 = new Intent(this, SettingsActivity.class);
+                startActivity(intent2);
                 break;
             case R.id.nav_feedback:
 

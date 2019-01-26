@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/TitleWindow"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:textColor="@color/colorPrimaryDark"
         android:typeface="serif"
         android:textStyle="bold" />
@@ -32,15 +32,13 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/Subtitle"
-                android:typeface="serif"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="16sp"
+                android:fontFamily="sans-serif"
+                android:textSize="14sp"
                 android:letterSpacing="0.15"
                 android:textStyle="bold"
                 />
@@ -49,20 +47,20 @@
                 android:layout_height="match_parent"
                 android:id="@+id/MessageWindow"
                 android:lineSpacingExtra="10dp"
-                android:typeface="serif"
-                android:letterSpacing="0.25"
+                android:letterSpacing="0.05"
                 android:textColor="@color/text_color"
-                android:textSize="14sp"/>
+                android:fontFamily="sans-serif"
+                android:textSize="13sp"/>
 
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/Subtitle1"
-                android:typeface="serif"
                 android:letterSpacing="0.15"
                 android:textColor="@color/text_color"
-                android:textSize="16sp"
+                android:fontFamily="sans-serif"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 />
             <TextView
@@ -70,57 +68,57 @@
                 android:layout_height="match_parent"
                 android:id="@+id/MessageWindow1"
                 android:lineSpacingExtra="10dp"
-                android:typeface="serif"
-                android:letterSpacing="0.25"
+                android:letterSpacing="0.05"
                 android:textColor="@color/text_color"
-                android:textSize="14sp"/>
+                android:fontFamily="sans-serif"
+                android:textSize="13sp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/Subtitle2"
-                android:typeface="serif"
                 android:letterSpacing="0.15"
                 android:textColor="@color/text_color"
-                android:textSize="16sp"
+                android:fontFamily="sans-serif"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/MessageWindow2"
-                android:typeface="serif"
-                android:letterSpacing="0.25"
+                android:letterSpacing="0.05"
                 android:textColor="@color/text_color"
                 android:lineSpacingExtra="10dp"
-                android:textSize="14sp"/>
+                android:fontFamily="sans-serif"
+                android:textSize="13sp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/Subtitle3"
-                android:typeface="serif"
                 android:letterSpacing="0.15"
                 android:textColor="@color/text_color"
-                android:textSize="16sp"
+                android:fontFamily="sans-serif"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/MessageWindow3"
-                android:typeface="serif"
-                android:letterSpacing="0.25"
+                android:letterSpacing="0.05"
                 android:textColor="@color/text_color"
                 android:lineSpacingExtra="10dp"
-                android:textSize="14sp"/>
+                android:fontFamily="sans-serif"
+                android:textSize="13sp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/Subtitle4"
-                android:typeface="serif"
-                android:textSize="16sp"
+                android:fontFamily="sans-serif"
+                android:textSize="14sp"
                 android:letterSpacing="0.15"
                 android:textColor="@color/text_color"
                 android:textStyle="bold"
@@ -129,11 +127,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/MessageWindow4"
-                android:typeface="serif"
-                android:letterSpacing="0.25"
+                android:fontFamily="sans-serif"
+                android:textSize="13sp"
+                android:letterSpacing="0.05"
                 android:textColor="@color/text_color"
                 android:lineSpacingExtra="10dp"
-                android:textSize="14sp"/>
+                />
 
         </LinearLayout>
     </ScrollView>
