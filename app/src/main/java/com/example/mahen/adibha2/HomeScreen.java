@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.GravityCompat;
@@ -125,6 +126,8 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
         setContentView(R.layout.activity_home);
 
 
+
+
         //setting preferences
         PrefsManager prefsManager = new PrefsManager(getApplicationContext());
         prefsManager.setFirstTimeLaunch(true);
@@ -141,6 +144,7 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         dropLocTxt = findViewById(R.id.dropLocation);
         pickupLocTxt = findViewById(R.id.pickupLocation);
+
 
 
         //hiding the drop textbox on default
@@ -431,7 +435,21 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
     public void onLocationChanged(Location location) {
         //Place current location marker
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        Geocoder geocoder;
+        List<Address> addresses;
+        String address = "";
+        geocoder = new Geocoder(HomeScreen.this, Locale.getDefault());
+        try {
+            addresses = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(), 1);
+            address = addresses.get(0).getAddressLine(0);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(HomeScreen.this, "Can't get Address", Toast.LENGTH_SHORT).show();
+        } catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
+        }
 
+        pickupLocTxt.setText(address);
         options = new MarkerOptions();
 
         // Setting the position of the marker
@@ -551,7 +569,7 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
                     getCitynavigation(type);
                     break;
                 case R.id.outstation:
-//                    disableAuto(true);
+//                    disableAuto(false);
                     type = "outstation";
                     dropVisiblity(type);
                     getOutstation(type);
@@ -565,6 +583,7 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
                 case R.id.rental:
 //                    disableAuto(false);
                     type = "rental";
+
                     dropVisiblity(type);
                     getnavigation(type);
                     break;
@@ -575,7 +594,7 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
                     getCitynavigation(type);
                     break;
                 case R.id.outstation:
-//                    disableAuto(true);
+//                    disableAuto(false);
                     type = "outstation";
                     dropVisiblity(type);
                     getOutstation(type);
@@ -597,7 +616,7 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
                     switch (menuItem.getTitle().toString()) {
                         case "Auto":
                             AlertDialog alertDialog = new AlertDialog.Builder(HomeScreen.this).create();
-                            alertDialog.setMessage("Auto is not provided for Rental");
+                            alertDialog.setMessage("Auto is not provided for Outstation");
                             alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
@@ -666,8 +685,14 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
 
 
     public void disableAuto(boolean val) {
-        bottomNavigationView.getMenu().getItem(0).setEnabled(val);
-        bottomNavigationView.getMenu().findItem(R.id.navigation_songs).setIcon(R.drawable.ic_auto_disabled);
+        if (val)
+            bottomNavigationView.getMenu().getItem(0).setVisible(true);
+        else
+        bottomNavigationView.getMenu().getItem(0).setVisible(false);
+
+
+
+//`w
     }
 
     private void slideUp(View view) {
@@ -683,6 +708,7 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
     }
 
     private void getnavigation(String typeof) {
+
         Log.i("my_tag", "Welcome");
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -691,7 +717,7 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
                 switch (menuItem.getTitle().toString()) {
                     case "Auto":
                         AlertDialog alertDialog = new AlertDialog.Builder(HomeScreen.this).create();
-                        alertDialog.setMessage("Auto is not provided for Outstation");
+                        alertDialog.setMessage("Auto is not provided for Rental");
                         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {

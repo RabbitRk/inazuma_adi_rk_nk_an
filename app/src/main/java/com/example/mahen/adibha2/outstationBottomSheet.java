@@ -74,7 +74,7 @@ public class outstationBottomSheet extends BottomSheetDialogFragment {
         rideNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!pick_up_loc.equals("")) {
+                if (!pick_up_loc.equals("")&&!drop_loc.equals("")) {
                     Calendar c = Calendar.getInstance();
                     SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
                     SimpleDateFormat dft = new SimpleDateFormat("HH:mm");
@@ -112,7 +112,7 @@ public class outstationBottomSheet extends BottomSheetDialogFragment {
         rideLater.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!pick_up_loc.equals("")) {
+                if (!pick_up_loc.equals("")&&!drop_loc.equals("")) {
                     final Calendar c = Calendar.getInstance();
                     int mYear = 0;
                     int mMonth = 0;

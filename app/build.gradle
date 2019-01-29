@@ -45,4 +45,6 @@ dependencies {
     implementation 'com.github.StevenDXC:DxLoadingButton:2.1'
 
     implementation 'com.github.Hitomis:CircleMenu:v1.1.0'
+    implementation 'com.github.maksim88:PasswordEditText:v0.9'
+    implementation 'com.github.SubhrajyotiSen:library:1.1.2'
 }

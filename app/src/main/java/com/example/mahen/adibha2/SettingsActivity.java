@@ -2,6 +2,7 @@ package com.example.mahen.adibha2;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.media.Ringtone;
@@ -17,10 +18,15 @@ import android.support.v7.app.ActionBar;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
+import android.view.View;
 import android.widget.Toast;
+
+import com.maksim88.passwordedittext.PasswordEditText;
 
 import java.util.List;
 
@@ -167,6 +173,23 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        setContentView(R.layout.action_bar_setting);
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//
+//        //get tool bar
+//        if (getSupportActionBar() != null) {
+//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//            getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        }
+
+        //toolbar action to go back is any activity exists
+//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
         getFragmentManager().beginTransaction().replace(android.R.id.content,
                 new GeneralPreferenceFragment()).commit();
 
@@ -178,11 +201,35 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.pref_general);
-            EditTextPreference editTextPreference= (EditTextPreference) findPreference("example_username");
-            Toast.makeText(getActivity(), editTextPreference.getKey(), Toast.LENGTH_SHORT).show();
+            final Preference password= (Preference) findPreference("example_password");
+//            Toast.makeText(getActivity(), editTextPreference.getKey(), Toast.LENGTH_SHORT).show();
             bindPreferenceSummaryToValue(findPreference("example_username"));
             bindPreferenceSummaryToValue(findPreference("example_mail"));
-            bindPreferenceSummaryToValue(findPreference("example_number"));
+
+            password.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    passworddialog();
+                    return false;
+                }
+
+                private void passworddialog() {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    View passview=getActivity().getLayoutInflater().inflate(R.layout.passworddialog,null);
+                    PasswordEditText currentPass=passview.findViewById(R.id.current_password);
+                    PasswordEditText newPass=passview.findViewById(R.id.new_password);
+                    PasswordEditText confirmPass=passview.findViewById(R.id.confirm_password);
+                    builder.setView(passview);
+                    builder.setTitle("CHANGE PASSWORD").setCancelable(false)
+                            .setNegativeButton("Cancel", null)
+                            .setPositiveButton("Ok", null);
+                    AlertDialog alertDialog=builder.create();
+                    alertDialog.show();
+
+
+                }
+            });
+//            bindPreferenceSummaryToValue(findPreference("example_password"));
 
 
         }
@@ -197,7 +244,9 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         }
 
 
+
     }
+
 
 
     /**

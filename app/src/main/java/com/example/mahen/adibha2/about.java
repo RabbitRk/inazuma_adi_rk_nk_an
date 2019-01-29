@@ -2,6 +2,8 @@ package com.example.mahen.adibha2;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.TextView;
 
 public class about extends AppCompatActivity {
@@ -12,6 +14,22 @@ public class about extends AppCompatActivity {
         setContentView(R.layout.activity_about);
         TextView mTitleWindow = findViewById(R.id.TitleWindow);
         TextView mMessageWindow = findViewById(R.id.MessageWindow);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        //get tool bar
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
+        //toolbar action to go back is any activity exists
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         mTitleWindow.setText("Got My Trip");
         StringBuilder stringBuilder = new StringBuilder();
