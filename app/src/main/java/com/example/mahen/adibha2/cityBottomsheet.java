@@ -60,7 +60,7 @@ public class cityBottomsheet extends BottomSheetDialogFragment {
         rideNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!pick_up_loc.equals("")&&!pick_up_loc.equals("")) {
+                if (!pick_up_loc.equals("")&&!drop_loc.equals("")) {
                     Intent tocity = new Intent(getContext(), City.class);
                     tocity.putExtra("pick_up", pick_up_loc);
                     tocity.putExtra("drop", drop_loc);

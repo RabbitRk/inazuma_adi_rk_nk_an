@@ -48,7 +48,7 @@ public abstract class AppCompatPreferenceActivity extends PreferenceActivity {
 
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
-        getDelegate().setContentView(layoutResID);
+//        getDelegate().setContentView(layoutResID);
     }
 
     @Override

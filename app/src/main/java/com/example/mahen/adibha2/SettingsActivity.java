@@ -14,6 +14,7 @@ import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
@@ -24,9 +25,11 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.maksim88.passwordedittext.PasswordEditText;
+import com.subhrajyoti.passwordview.PasswordView;
 
 import java.util.List;
 
@@ -173,6 +176,13 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //setting up toolbar
+        getLayoutInflater().inflate(R.layout.action_bar_setting, (ViewGroup) findViewById(android.R.id.content));
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Settings");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 //        setContentView(R.layout.action_bar_setting);
 //        Toolbar toolbar = findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
@@ -184,12 +194,12 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 //        }
 
         //toolbar action to go back is any activity exists
-//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                finish();
-//            }
-//        });
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         getFragmentManager().beginTransaction().replace(android.R.id.content,
                 new GeneralPreferenceFragment()).commit();
 
@@ -216,7 +226,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 private void passworddialog() {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     View passview=getActivity().getLayoutInflater().inflate(R.layout.passworddialog,null);
-                    PasswordEditText currentPass=passview.findViewById(R.id.current_password);
+                    PasswordView currentPass=passview.findViewById(R.id.current_password);
                     PasswordEditText newPass=passview.findViewById(R.id.new_password);
                     PasswordEditText confirmPass=passview.findViewById(R.id.confirm_password);
                     builder.setView(passview);
