@@ -11,6 +11,7 @@
         android:inputType="textCapWords"
         android:key="example_username"
         android:maxLines="1"
+        android:fontFamily="sans-serif"
         android:selectAllOnFocus="true"
         android:singleLine="true"
         android:title="UserName" />
@@ -25,6 +26,7 @@
         android:inputType="textEmailAddress"
         android:key="example_mail"
         android:maxLines="1"
+        android:fontFamily="sans-serif"
         android:selectAllOnFocus="true"
         android:singleLine="true"
         android:title="Email Address" />
@@ -38,6 +40,7 @@
         android:inputType="phone"
         android:key="example_password"
         android:maxLines="1"
+        android:fontFamily="sans-serif"
         android:selectAllOnFocus="true"
         android:singleLine="true"
         android:title="Password" />
