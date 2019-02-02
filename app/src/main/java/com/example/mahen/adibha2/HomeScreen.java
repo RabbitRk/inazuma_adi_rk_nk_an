@@ -65,6 +65,8 @@ import java.util.List;
 import java.util.Locale;
 
 import com.example.mahen.adibha2.Preferences.PrefsManager;
+import com.morsebyte.shailesh.twostagerating.FeedbackWithRatingReceivedListener;
+import com.morsebyte.shailesh.twostagerating.TwoStageRate;
 
 import static com.example.mahen.adibha2.Preferences.PrefsManager.ID_KEY;
 import static com.example.mahen.adibha2.Preferences.PrefsManager.USER_EMAIL;
@@ -91,6 +93,8 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
     public static final String MESSAGE = "OPTION";
 
     int pickP = 0, dropP = 0;
+
+    Button rent_button,city_button,outstation_button;
 
     //map utils
     private GoogleMap mMap;
@@ -159,6 +163,9 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
         bottomNavigationView.setVisibility(View.GONE);
         ridelater = findViewById(R.id.button3);
         travel_type = findViewById(R.id.btn_nav_bar);
+        rent_button=findViewById(R.id.rental);
+        city_button=findViewById(R.id.city);
+        outstation_button=findViewById(R.id.outstation);
 
 
         //map integeration goes here
@@ -391,16 +398,16 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
                 break;
             case R.id.nav_feedback:
 
-//                TwoStageRate twoStageRate = TwoStageRate.with(this);
-//
-//                twoStageRate.showRatePromptDialog();
-//                twoStageRate.setFeedbackWithRatingReceivedListener(new FeedbackWithRatingReceivedListener() {
-//                    @Override
-//                    public void onFeedbackReceived(float rating, String feedback) {
-//                        Toast.makeText(HomeScreen.this, "Rating :" + rating + "Feedback :" + feedback, Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//                Toast.makeText(getApplicationContext(), "Feedback Option Selected", Toast.LENGTH_SHORT).show();
+                TwoStageRate twoStageRate = TwoStageRate.with(this);
+
+                twoStageRate.showRatePromptDialog();
+                twoStageRate.setFeedbackWithRatingReceivedListener(new FeedbackWithRatingReceivedListener() {
+                    @Override
+                    public void onFeedbackReceived(float rating, String feedback) {
+                        Toast.makeText(HomeScreen.this, "Rating :" + rating + "Feedback :" + feedback, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                Toast.makeText(getApplicationContext(), "Feedback Option Selected", Toast.LENGTH_SHORT).show();
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);
@@ -433,6 +440,8 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
 
     @Override
     public void onLocationChanged(Location location) {
+
+
         //Place current location marker
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
         Geocoder geocoder;
@@ -553,26 +562,46 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
     }
 
     public void onSlideViewButtonClick(View view) {
+
+
         if (isUp) {
-            slideDown(myView);
+
+
+
             switch (view.getId()) {
                 case R.id.rental:
+                    rent_button.setTextColor(getResources().getColor(R.color.text_color));
+//                    city_button.setTextColor(getResources().getColor(R.color.text_color));
+//                    outstation_button.setTextColor(getResources().getColor(R.color.text_color));
+
 //                    disableAuto(false);
                     type = "rental";
                     dropVisiblity(type);
                     getnavigation(type);
+                    slideDown(myView);
                     break;
                 case R.id.city:
+//
+                    city_button.setTextColor(getResources().getColor(R.color.text_color));
+//                    rent_button.setTextColor(getResources().getColor(R.color.text_color));
+//                    outstation_button.setTextColor(getResources().getColor(R.color.text_color));
+
 //                    disableAuto(true);
                     type = "city";
                     dropVisiblity(type);
                     getCitynavigation(type);
+                    slideDown(myView);
                     break;
                 case R.id.outstation:
+
+                    outstation_button.setTextColor(getResources().getColor(R.color.text_color));
+//                    city_button.setTextColor(getResources().getColor(R.color.text_color));
+//                    rent_button.setTextColor(getResources().getColor(R.color.text_color));
 //                    disableAuto(false);
                     type = "outstation";
                     dropVisiblity(type);
                     getOutstation(type);
+                    slideDown(myView);
                     break;
 
             }
@@ -581,6 +610,10 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
             slideUp(myView);
             switch (view.getId()) {
                 case R.id.rental:
+
+                    rent_button.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                    city_button.setTextColor(getResources().getColor(R.color.text_color));
+                    outstation_button.setTextColor(getResources().getColor(R.color.text_color));
 //                    disableAuto(false);
                     type = "rental";
 
@@ -588,12 +621,22 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
                     getnavigation(type);
                     break;
                 case R.id.city:
+
+
+                    city_button.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                    rent_button.setTextColor(getResources().getColor(R.color.text_color));
+                    outstation_button.setTextColor(getResources().getColor(R.color.text_color));
 //                    disableAuto(true);
+
                     type = "city";
                     dropVisiblity(type);
                     getCitynavigation(type);
                     break;
                 case R.id.outstation:
+
+                    outstation_button.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                    city_button.setTextColor(getResources().getColor(R.color.text_color));
+                    rent_button.setTextColor(getResources().getColor(R.color.text_color));
 //                    disableAuto(false);
                     type = "outstation";
                     dropVisiblity(type);
@@ -732,6 +775,7 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
                         bundle.putString("pickn", pickupLocTxt.getText().toString());
                         bundle.putString("vehicle", "Prime");
                         bundle.putString("travel_type", type);
+                        bundle.putString("base_fare","399");
                         bottomSheet1.setArguments(bundle);
                         bottomSheet1.show(getSupportFragmentManager(), "exampleBottomSheet");
                         break;
@@ -742,6 +786,7 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
                         bundle1.putString("pickn", pickupLocTxt.getText().toString());
                         bundle1.putString("vehicle", "SUV");
                         bundle1.putString("travel_type", type);
+                        bundle1.putString("base_fare","599");
                         bottomSheet2.setArguments(bundle1);
                         bottomSheet2.show(getSupportFragmentManager(), "exampleBottomSheet");
                         break;
@@ -771,6 +816,7 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
 
                         bundle0.putString("vehicle", "Auto");
                         bundle0.putString("travel_type", type);
+                        bundle0.putString("base_fare","35");
                         bottomSheet.setArguments(bundle0);
                         bottomSheet.show(getSupportFragmentManager(), "exampleBottomSheet");
                         break;
@@ -780,6 +826,7 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
                         Bundle bundle = new Bundle();
                         bundle.putString("pickn", pickupLocTxt.getText().toString());
                         bundle.putString("dropn", dropLocTxt.getText().toString());
+                        bundle.putString("base_fare","150");
 
 //                        bundle.putString("ori_lat", String.valueOf(origin.latitude));
 //                        bundle.putString("ori_lng", String.valueOf(origin.longitude));
@@ -798,7 +845,7 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
                         Bundle bundle1 = new Bundle();
                         bundle1.putString("pickn", pickupLocTxt.getText().toString());
                         bundle1.putString("dropn", dropLocTxt.getText().toString());
-//
+                      bundle1.putString("base_fare","200");
 //                        bundle1.putString("ori_lat", String.valueOf(origin.latitude));
 //                        bundle1.putString("ori_lng", String.valueOf(origin.longitude));
 //                        bundle1.putString("dest_lat", String.valueOf(dest.latitude));

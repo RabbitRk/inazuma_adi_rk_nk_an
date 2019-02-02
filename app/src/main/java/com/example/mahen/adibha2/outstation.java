@@ -309,6 +309,7 @@ public class outstation extends AppCompatActivity {
                     Log.i("Responce.............", response);
                     Toast.makeText(getApplicationContext(), "Responce is  " + response, Toast.LENGTH_SHORT).show();
                     Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+                    yourRides();
                 }
             }
 
@@ -363,9 +364,6 @@ public class outstation extends AppCompatActivity {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay,
                                           int minute) {
-
-//                        SimpleDateFormat timeat= new SimpleDateFormat("HH:mm");
-
                         timeatTxt.setText(hourOfDay+":"+minute);
                     }
 
@@ -378,8 +376,6 @@ public class outstation extends AppCompatActivity {
                     @SuppressLint("DefaultLocale")
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-
-//                        SimpleDateFormat dateof = new SimpleDateFormat("dd-MM-yyyy");
                         dateonTxt.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
                     }
 
@@ -401,12 +397,16 @@ public class outstation extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 
-//                        SimpleDateFormat dateof = new SimpleDateFormat("dd-MM-yyyy");
                         returndateTxt.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
                     }
 
                 }, mYear, mMonth, mDay);
 
         datePickerDialog2.show();
+    }
+
+    private void yourRides() {
+        yourrides.insertdata(user_id,datetime, "Outstation",v_type, pickupLocation,dropLocation);
+        Log.i("value","inserted");
     }
 }

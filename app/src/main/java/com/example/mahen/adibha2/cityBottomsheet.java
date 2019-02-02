@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class cityBottomsheet extends BottomSheetDialogFragment {
 
@@ -25,6 +26,8 @@ public class cityBottomsheet extends BottomSheetDialogFragment {
     static String ori_lng = null;
     static String dest_lat = null;
     static String dest_lng = null;
+    static String price= null;
+    TextView price_txt;
     ImageView vehicle_icon;
 
     @Nullable
@@ -34,6 +37,7 @@ public class cityBottomsheet extends BottomSheetDialogFragment {
 
         rideNow = v.findViewById(R.id.ride_now);
         vehicle_icon=v.findViewById(R.id.iconcard);
+        price_txt=v.findViewById(R.id.price);
 
         assert getArguments() != null;
         pick_up_loc = getArguments().getString("pickn");
@@ -41,9 +45,11 @@ public class cityBottomsheet extends BottomSheetDialogFragment {
         type = getArguments().getString("travel_type");
         drop_loc = getArguments().getString("dropn");
         ori_lat = getArguments().getString("ori_lat");
+        price=getArguments().getString("base_fare");
         ori_lng = getArguments().getString("ori_lng");
         dest_lat = getArguments().getString("dest_lat");
         dest_lng = getArguments().getString("dest_lng");
+        price_txt.setText(price);
 
         switch (v_type){
             case "Auto":

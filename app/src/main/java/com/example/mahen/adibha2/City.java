@@ -358,6 +358,7 @@ public class City extends AppCompatActivity {
                     Log.i("Responce.............", response);
                     Toast.makeText(getApplicationContext(), "Responce is  " + response, Toast.LENGTH_SHORT).show();
                     Toast.makeText(getApplicationContext(), "Failed..." + response, Toast.LENGTH_SHORT).show();
+                    yourRides();
                 }
             }
 
@@ -369,7 +370,7 @@ public class City extends AppCompatActivity {
             }
         }) {
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
 
                 params.put("CUS_ID", user_id);
@@ -387,5 +388,8 @@ public class City extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(stringRequest);
     }
-
+    private void yourRides() {
+        yourrides.insertdata(user_id,datetime, "City",v_type, pickupLocation,dropLocation);
+        Log.i("value","inserted");
+    }
 }

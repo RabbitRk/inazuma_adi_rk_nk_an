@@ -47,13 +47,34 @@
                 app:contentPaddingLeft="10dp"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-                <ImageButton
-                    android:id="@+id/nav_button"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"
-                    android:background="@drawable/ic_drawer"
-                    tools:ignore="ContentDescription" />
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    >
+                    <ImageButton
+                        android:id="@+id/nav_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start|center_vertical"
+                        android:background="@drawable/ic_drawer"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/appname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="san_serif"
+                        android:textSize="25sp"
+                        android:layout_marginStart="30dp"
+                        android:text="GMT"
+                        android:textColor="@color/text_color" />
+
+                </LinearLayout>
+
+
 
             </android.support.v7.widget.CardView>
 
@@ -168,7 +189,7 @@
                     android:onClick="onSlideViewButtonClick"
                     android:text="Rental"
                     android:textAllCaps="false"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/text_color"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 

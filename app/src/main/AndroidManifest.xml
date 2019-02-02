@@ -79,7 +79,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.mahen.adibha2.HomeScreen" />
         </activity>
-        <activity android:name=".newpass" />
+
     </application>
 
 </manifest>

@@ -33,7 +33,7 @@
                 android:fontFamily="serif"
                 android:textSize="13sp"
                 android:textColor="@color/text_color"
-                android:text="Rent a cab at flexible hourly packages"
+                android:text="Take Your Ride with flexible hourly packages"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -57,7 +57,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="250"
+                    android:id="@+id/price"
                     android:fontFamily="serif"
+                    android:textColor="@color/text_color"
                     android:drawableStart="@drawable/ic_rupee_indian"
                     android:textSize="18sp"
                     android:textColorHint="@color/text_color"

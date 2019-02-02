@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -34,7 +35,8 @@ public class BookBottomSheet extends BottomSheetDialogFragment {
     ImageView vehicle_icon;
 
     String rideLater_date, rideLater_time, pick_up_loc, v_type = "2", type, drop_loc;
-
+    static String price= null;
+    TextView price_txt;
 
     @Nullable
     @Override
@@ -43,13 +45,15 @@ public class BookBottomSheet extends BottomSheetDialogFragment {
         ridenow = v.findViewById(R.id.ride_now2);
         ridelater = v.findViewById(R.id.button3);
         vehicle_icon=v.findViewById(R.id.iconcard);
-
+        price_txt=v.findViewById(R.id.price);
 
         assert getArguments() != null;
         pick_up_loc = getArguments().getString("pickn");
         v_type = getArguments().getString("vehicle");
+        price=getArguments().getString("base_fare");
         type = getArguments().getString("travel_type");
         drop_loc = getArguments().getString("dropn");
+        price_txt.setText(price);
 
         switch (v_type){
             case "Auto":

@@ -129,7 +129,7 @@ public class rental extends AppCompatActivity {
         yourrides = new dbHelper(this);
 
 
-        //recylerview components
+//        recylerview components
 //        packView = findViewById(R.id.packdetails);
 //        packView.setHasFixedSize(true);
 
