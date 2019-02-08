@@ -328,18 +328,30 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
 
                 if (marker.getTitle().equalsIgnoreCase("Starting Point")) {
                     oriMarker.remove();
+                    MarkerOptions markerOptionsOri = new MarkerOptions();
+                    markerOptionsOri.position(marker.getPosition());
+                    markerOptionsOri.title("Starting point");
+                    markerOptionsOri.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                    oriMarker=mMap.addMarker(markerOptionsOri);
+                    oriMarker.setDraggable(true);
 
-                    MarkerPoints.remove(0);
-                    MarkerPoints.add(0, marker.getPosition());
-                    origin = MarkerPoints.get(0);
+//                    MarkerPoints.remove(0);
+//                    MarkerPoints.add(0, marker.getPosition());
+//                    origin = MarkerPoints.get(0);
                     pickupLocTxt.setText(address);
 
                 } else {
                     destMarker.remove();
-                    MarkerPoints.remove(1);
+                    MarkerOptions markerOptionsDes = new MarkerOptions();
+                    markerOptionsDes.position(marker.getPosition());
+                    markerOptionsDes.title("Destination point");
+                    markerOptionsDes.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+                    destMarker = mMap.addMarker(markerOptionsDes);
+                    destMarker.setDraggable(true);
+//                    MarkerPoints.remove(1);
                     dropLocTxt.setText(address);
-                    MarkerPoints.add(1, marker.getPosition());
-                    dest = MarkerPoints.get(1);
+//                    MarkerPoints.add(1, marker.getPosition());
+//                    dest = MarkerPoints.get(1);
                 }
             }
         });
@@ -459,6 +471,7 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
         }
 
         pickupLocTxt.setText(address);
+        MarkerPoints.add(0,latLng);
         options = new MarkerOptions();
 
         // Setting the position of the marker
@@ -571,6 +584,8 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
             switch (view.getId()) {
                 case R.id.rental:
                     rent_button.setTextColor(getResources().getColor(R.color.text_color));
+                    if (destMarker!=null)
+                        destMarker.remove();
 //                    city_button.setTextColor(getResources().getColor(R.color.text_color));
 //                    outstation_button.setTextColor(getResources().getColor(R.color.text_color));
 
@@ -614,6 +629,8 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
                     rent_button.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
                     city_button.setTextColor(getResources().getColor(R.color.text_color));
                     outstation_button.setTextColor(getResources().getColor(R.color.text_color));
+                    if (destMarker!=null)
+                        destMarker.remove();
 //                    disableAuto(false);
                     type = "rental";
 
@@ -845,7 +862,7 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
                         Bundle bundle1 = new Bundle();
                         bundle1.putString("pickn", pickupLocTxt.getText().toString());
                         bundle1.putString("dropn", dropLocTxt.getText().toString());
-                      bundle1.putString("base_fare","200");
+                        bundle1.putString("base_fare","200");
 //                        bundle1.putString("ori_lat", String.valueOf(origin.latitude));
 //                        bundle1.putString("ori_lng", String.valueOf(origin.longitude));
 //                        bundle1.putString("dest_lat", String.valueOf(dest.latitude));
@@ -985,7 +1002,8 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
                 markerOptionsOri.title("Starting point");
                 markerOptionsOri.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
                 oriMarker = mMap.addMarker(markerOptionsOri);
-                mMap.addMarker(markerOptionsOri).setDraggable(true);
+                oriMarker.setDraggable(true);
+//                mMap.addMarker(markerOptionsOri).setDraggable(true);
                 MarkerPoints.add(0, place.getLatLng());
                 //move map camera
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(place.getLatLng()));
@@ -1000,7 +1018,8 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
                 markerOptionsDes.title("Destination point");
                 markerOptionsDes.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
                 destMarker = mMap.addMarker(markerOptionsDes);
-                mMap.addMarker(markerOptionsDes).setDraggable(true);
+                destMarker.setDraggable(true);
+//                mMap.addMarker(markerOptionsDes).setDraggable(true);
                 MarkerPoints.add(1, place.getLatLng());
                 //move map camera
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(place.getLatLng()));
