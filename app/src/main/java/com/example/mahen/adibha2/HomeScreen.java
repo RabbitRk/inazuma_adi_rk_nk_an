@@ -3,6 +3,7 @@ package com.example.mahen.adibha2;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -41,10 +42,15 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResult;
+import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
@@ -122,7 +128,7 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
     //Place autocomplete elements
     TextView pickupLocTxt, dropLocTxt;
     Context mContext;
-
+    final static int REQUEST_LOCATION = 199;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -229,7 +235,10 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
                 .enableAutoManage(this, 0 /* clientId */, this)
                 .addApi(Places.GEO_DATA_API)
                 .build();
+
+        turnOnGPS();
     }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -370,6 +379,99 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
         }
 
     }
+    //...................................................GPS REQUEST GOES ON.............................................................
+    private void turnOnGPS() {
+        //
+
+
+        // Todo Location Already on  ... start
+        final LocationManager manager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        if (manager.isProviderEnabled(LocationManager.GPS_PROVIDER) && hasGPSDevice(this)) {
+            Toast.makeText(this,"Gps already enabled",Toast.LENGTH_SHORT).show();
+
+        }
+        // Todo Location Already on  ... end
+
+        if(!hasGPSDevice(this)){
+            Toast.makeText(this,"Gps not Supported",Toast.LENGTH_SHORT).show();
+        }
+
+        if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER) && hasGPSDevice(this)) {
+            Log.e("keshav","Gps already enabled");
+            Toast.makeText(this,"Gps not enabled",Toast.LENGTH_SHORT).show();
+            enableLoc();
+        }else{
+            Log.e("keshav","Gps already enabled");
+            Toast.makeText(this,"Gps already enabled",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private boolean hasGPSDevice(Context context) {
+        final LocationManager mgr = (LocationManager) context
+                .getSystemService(Context.LOCATION_SERVICE);
+        if (mgr == null)
+            return false;
+        final List<String> providers = mgr.getAllProviders();
+        if (providers == null)
+            return false;
+        return providers.contains(LocationManager.GPS_PROVIDER);
+    }
+    private void enableLoc() {
+
+        if (mGoogleApiClient == null) {
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .addApi(LocationServices.API)
+                    .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
+                        @Override
+                        public void onConnected(Bundle bundle) {
+
+                        }
+
+                        @Override
+                        public void onConnectionSuspended(int i) {
+                            mGoogleApiClient.connect();
+                        }
+                    })
+                    .addOnConnectionFailedListener(new GoogleApiClient.OnConnectionFailedListener() {
+                        @Override
+                        public void onConnectionFailed(ConnectionResult connectionResult) {
+
+                            Log.d("Location error","Location error " + connectionResult.getErrorCode());
+                        }
+                    }).build();
+            mGoogleApiClient.connect();
+
+            LocationRequest locationRequest = LocationRequest.create();
+            locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+            locationRequest.setInterval(30 * 1000);
+            locationRequest.setFastestInterval(5 * 1000);
+            LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
+                    .addLocationRequest(locationRequest);
+
+            builder.setAlwaysShow(true);
+
+            PendingResult<LocationSettingsResult> result =
+                    LocationServices.SettingsApi.checkLocationSettings(mGoogleApiClient, builder.build());
+            result.setResultCallback(new ResultCallback<LocationSettingsResult>() {
+                @Override
+                public void onResult(LocationSettingsResult result) {
+                    final Status status = result.getStatus();
+                    switch (status.getStatusCode()) {
+                        case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+                            try {
+                                // Show the dialog by calling startResolutionForResult(),
+                                // and check the result in onActivityResult().
+                                status.startResolutionForResult(HomeScreen.this, REQUEST_LOCATION);
+                            } catch (IntentSender.SendIntentException e) {
+                                // Ignore the error.
+                            }
+                            break;
+                    }
+                }
+            });
+        }
+    }
+    //................................................................................................................
 
     public void getPrefsdetails() {
         userpref = getSharedPreferences(USER_PREFS, MODE_PRIVATE);
@@ -485,6 +587,19 @@ public class HomeScreen extends FragmentActivity implements OnMapReadyCallback,
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         }
+
+        //creating marker onload as staring
+        LatLng latLng1 = new LatLng(location.getLatitude(), location.getLongitude());
+        MarkerOptions markerOptionsOri = new MarkerOptions();
+        markerOptionsOri.position(latLng1);
+        markerOptionsOri.title("Starting point");
+        markerOptionsOri.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+        oriMarker = mMap.addMarker(markerOptionsOri);
+        mMap.addMarker(markerOptionsOri).setDraggable(true);
+        MarkerPoints.add(0, latLng1);
+        //move map camera
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng1));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(17));
     }
 
 
