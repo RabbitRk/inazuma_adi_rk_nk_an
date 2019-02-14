@@ -3,7 +3,9 @@ package com.example.mahen.adibha2;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,6 +29,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.dx.dxloadingbutton.lib.LoadingButton;
 import com.example.mahen.adibha2.Preferences.PrefsManager;
+import com.example.mahen.adibha2.services.InternetBroadCast;
 
 import org.json.JSONException;
 import org.json.JSONArray;
@@ -52,6 +55,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        //Checks Network is on or not
+        InternetBroadCast receiver;
+        IntentFilter filter;
+        filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        receiver = new InternetBroadCast();
+        registerReceiver(receiver, filter);
 
         //volley requestqueue initialization
         requestQueue = Volley.newRequestQueue(this);
