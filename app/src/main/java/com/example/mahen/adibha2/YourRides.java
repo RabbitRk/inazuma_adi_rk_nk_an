@@ -1,5 +1,7 @@
 package com.example.mahen.adibha2;
 
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +14,7 @@ import android.view.View;
 
 import com.example.mahen.adibha2.DBhelper.dbHelper;
 import com.example.mahen.adibha2.DBhelper.recycleAdapter;
+import com.example.mahen.adibha2.services.InternetBroadCast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +33,14 @@ public class YourRides extends AppCompatActivity {
         setContentView(R.layout.your_rides);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+        //Checks Network is on or not
+        InternetBroadCast receiver;
+        IntentFilter filter;
+        filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        receiver = new InternetBroadCast();
+        registerReceiver(receiver, filter);
 
         //get tool bar
         if (getSupportActionBar() != null) {

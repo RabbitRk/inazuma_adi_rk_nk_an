@@ -1,8 +1,12 @@
 package com.example.mahen.adibha2;
 
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import com.example.mahen.adibha2.services.InternetBroadCast;
 
 public class Terms extends AppCompatActivity {
 
@@ -10,6 +14,14 @@ public class Terms extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_terms);
+
+
+        //Checks Network is on or not
+        InternetBroadCast receiver;
+        IntentFilter filter;
+        filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        receiver = new InternetBroadCast();
+        registerReceiver(receiver, filter);
         TextView mTitleWindow = findViewById(R.id.TitleWindow);
         TextView mMessageWindow = findViewById(R.id.MessageWindow);
         TextView mSubtitle = findViewById(R.id.Subtitle);

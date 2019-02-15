@@ -1,5 +1,7 @@
 package com.example.mahen.adibha2;
 
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -7,6 +9,8 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.mahen.adibha2.services.InternetBroadCast;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,6 +25,13 @@ public class Forgot_password extends AppCompatActivity {
         email=findViewById(R.id.editText4);
         phone_number=findViewById(R.id.editText5);
 
+
+        //Checks Network is on or not
+        InternetBroadCast receiver;
+        IntentFilter filter;
+        filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        receiver = new InternetBroadCast();
+        registerReceiver(receiver, filter);
 
         phone_number.addTextChangedListener(new TextWatcher() {
             @Override

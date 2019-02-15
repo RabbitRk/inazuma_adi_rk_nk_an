@@ -13,6 +13,9 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.CycleInterpolator;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -80,14 +83,20 @@ public class InternetBroadCast extends BroadcastReceiver implements Destroyable 
             dialogButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    dialog.dismiss();
+//                    dialog.dismiss();
 
                     if (!status) {
-                        new android.os.Handler().postDelayed(new Runnable() {
-                            public void run() {
-                                Dialogbox();
-                            }
-                        }, 2000);
+                        
+                        dialog.getWindow()
+                                .getDecorView()
+                                .animate()
+                                .translationX(16f)
+                                .setInterpolator(new CycleInterpolator(7f));
+//                        new android.os.Handler().postDelayed(new Runnable() {
+//                            public void run() {
+//                                Dialogbox();
+//                            }
+//                        }, 2000);
 
                     }
                     else

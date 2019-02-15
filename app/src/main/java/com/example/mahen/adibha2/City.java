@@ -5,7 +5,9 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,6 +30,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.dx.dxloadingbutton.lib.LoadingButton;
 import com.example.mahen.adibha2.DBhelper.dbHelper;
+import com.example.mahen.adibha2.services.InternetBroadCast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -71,6 +74,14 @@ public class City extends AppCompatActivity {
         setContentView(R.layout.activity_city);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+        //Checks Network is on or not
+        InternetBroadCast receiver;
+        IntentFilter filter;
+        filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        receiver = new InternetBroadCast();
+        registerReceiver(receiver, filter);
 
         //get tool bar
         if (getSupportActionBar() != null) {

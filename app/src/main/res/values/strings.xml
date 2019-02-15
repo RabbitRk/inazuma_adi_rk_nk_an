@@ -108,4 +108,5 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="pasnotchanged">Password is not changed</string>
+    <string name="title_activity_my_settings">MySettingsActivity</string>
 </resources>

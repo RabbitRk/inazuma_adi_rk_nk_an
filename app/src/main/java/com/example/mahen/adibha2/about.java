@@ -1,10 +1,14 @@
 package com.example.mahen.adibha2;
 
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
+
+import com.example.mahen.adibha2.services.InternetBroadCast;
 
 public class about extends AppCompatActivity {
 
@@ -16,6 +20,14 @@ public class about extends AppCompatActivity {
         TextView mMessageWindow = findViewById(R.id.MessageWindow);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+        //Checks Network is on or not
+        InternetBroadCast receiver;
+        IntentFilter filter;
+        filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        receiver = new InternetBroadCast();
+        registerReceiver(receiver, filter);
 
         //get tool bar
         if (getSupportActionBar() != null) {

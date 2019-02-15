@@ -4,7 +4,9 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -33,6 +35,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.example.mahen.adibha2.DBhelper.dbHelper;
+import com.example.mahen.adibha2.services.InternetBroadCast;
 
 import static com.example.mahen.adibha2.Preferences.PrefsManager.USER_NAME;
 import static com.example.mahen.adibha2.Preferences.PrefsManager.USER_PREFS;
@@ -59,6 +62,13 @@ public class outstation extends AppCompatActivity {
         setContentView(R.layout.activity_outstation);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //Checks Network is on or not
+        InternetBroadCast receiver;
+        IntentFilter filter;
+        filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        receiver = new InternetBroadCast();
+        registerReceiver(receiver, filter);
 
         //get tool bar
         if (getSupportActionBar() != null) {
