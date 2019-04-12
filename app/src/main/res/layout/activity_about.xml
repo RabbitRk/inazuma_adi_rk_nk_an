@@ -13,7 +13,7 @@
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
-            app:title="About"
+            app:title="About us"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
@@ -55,7 +55,7 @@
         <TextView
             android:id="@+id/MessageWindow"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:textSize="13sp"
             android:letterSpacing="0.1"
             android:textColor="@color/text_color"
